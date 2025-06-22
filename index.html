@@ -436,24 +436,24 @@
         background: #444;
       }
       .highlight-data {
-        color: #FF5900;
+        color: #ff5900;
         font-weight: 700;
         display: inline-block;
         padding: 0 2px;
       }
-      
+
       [data-theme="dark"] .highlight-data {
-        color: #FF7000;
+        color: #ff7000;
       }
-      
+
       .team-roster:nth-of-type(2) .highlight-data {
-        color: #0000FF;
+        color: #0000ff;
       }
-      
+
       [data-theme="dark"] .team-roster:nth-of-type(2) .highlight-data {
-        color: #8000FF;
+        color: #8000ff;
       }
-      
+
       .stat-value {
         font-size: 2.1em;
         font-weight: 500;
@@ -472,12 +472,12 @@
           transform: scale(1);
         }
       }
-      
+
       .important-stat {
         position: relative;
         overflow: hidden;
       }
-      
+
       .important-stat::after {
         content: "";
         position: absolute;
@@ -485,43 +485,51 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(45deg, rgba(255,89,0,0.1) 0%, rgba(255,112,0,0) 70%);
+        background: linear-gradient(
+          45deg,
+          rgba(255, 89, 0, 0.1) 0%,
+          rgba(255, 112, 0, 0) 70%
+        );
         z-index: 1;
         pointer-events: none;
       }
-      
+
       .team-roster:nth-of-type(2) .important-stat::after {
-        background: linear-gradient(45deg, rgba(0,0,255,0.1) 0%, rgba(128,0,255,0) 70%);
+        background: linear-gradient(
+          45deg,
+          rgba(0, 0, 255, 0.1) 0%,
+          rgba(128, 0, 255, 0) 70%
+        );
       }
-      
+
       .key-comparison {
         background: #f9f9f9;
         border-radius: 8px;
         padding: 15px;
         margin: 20px 0;
-        border-left: 4px solid #FF5900;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        border-left: 4px solid #ff5900;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
       }
-      
+
       [data-theme="dark"] .key-comparison {
         background: #2a2a2a;
-        border-left: 4px solid #FF7000;
+        border-left: 4px solid #ff7000;
       }
-      
+
       .vs-highlight {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin: 10px 0;
       }
-      
+
       .vs-highlight span {
         flex: 1;
         text-align: center;
         padding: 8px;
         font-weight: 600;
       }
-      
+
       .vs-highlight .vs-label {
         flex: 0.2;
         font-weight: normal;
@@ -618,11 +626,14 @@
                       <strong>สไตล์:</strong> เน้นวางแผนรอบลึก สร้างจังหวะให้ทีม
                     </li>
                     <li>
-                      <strong>จุดแข็ง:</strong> <span class="highlight-data">mid-round call</span>, clutch play
+                      <strong>จุดแข็ง:</strong>
+                      <span class="highlight-data">mid-round call</span>, clutch
+                      play
                     </li>
                     <li><strong>จุดอ่อน:</strong> ฟอร์มขึ้นลงในรอบสำคัญ</li>
                     <li>
-                      <strong>สถิติ:</strong> 1.12 K/D, <span class="highlight-data">75% post-plant win</span>
+                      <strong>สถิติ:</strong> 1.12 K/D,
+                      <span class="highlight-data">75% post-plant win</span>
                     </li>
                   </ul>
                   <div class="player-stat-highlight">
@@ -764,9 +775,16 @@
                 <div class="player-detail">
                   <ul>
                     <li><strong>สไตล์:</strong> anchor site, clutch เก่ง</li>
-                    <li><strong>จุดแข็ง:</strong> <span class="highlight-data">aim แม่น</span>, multi-kill บ่อย</li>
+                    <li>
+                      <strong>จุดแข็ง:</strong>
+                      <span class="highlight-data">aim แม่น</span>, multi-kill
+                      บ่อย
+                    </li>
                     <li><strong>จุดอ่อน:</strong> บางครั้งโดน isolate</li>
-                    <li><strong>สถิติ:</strong> <span class="highlight-data">308 ACS</span>, 1.25 K/D</li>
+                    <li>
+                      <strong>สถิติ:</strong>
+                      <span class="highlight-data">308 ACS</span>, 1.25 K/D
+                    </li>
                   </ul>
                   <div class="player-stat-highlight">
                     <canvas
@@ -1064,9 +1082,15 @@
                 <div class="player-detail">
                   <ul>
                     <li><strong>สไตล์:</strong> entry fragger, ดุดัน</li>
-                    <li><strong>จุดแข็ง:</strong> <span class="highlight-data">entry kill สูง</span>, clutch</li>
+                    <li>
+                      <strong>จุดแข็ง:</strong>
+                      <span class="highlight-data">entry kill สูง</span>, clutch
+                    </li>
                     <li><strong>จุดอ่อน:</strong> เสี่ยงตาย, บางรอบใจร้อน</li>
-                    <li><strong>สถิติ:</strong> <span class="highlight-data">247 ACS</span>, 1.19 K/D</li>
+                    <li>
+                      <strong>สถิติ:</strong>
+                      <span class="highlight-data">247 ACS</span>, 1.19 K/D
+                    </li>
                   </ul>
                   <div class="player-stat-highlight">
                     <canvas
@@ -1136,9 +1160,16 @@
                 <div class="player-detail">
                   <ul>
                     <li><strong>สไตล์:</strong> outplay, highlight play</li>
-                    <li><strong>จุดแข็ง:</strong> <span class="highlight-data">aim โหด</span>, <span class="highlight-data">1vX clutch</span></li>
+                    <li>
+                      <strong>จุดแข็ง:</strong>
+                      <span class="highlight-data">aim โหด</span>,
+                      <span class="highlight-data">1vX clutch</span>
+                    </li>
                     <li><strong>จุดอ่อน:</strong> บางรอบเล่นเสี่ยง</li>
-                    <li><strong>สถิติ:</strong> 235 ACS, <span class="highlight-data">1.16 K/D</span></li>
+                    <li>
+                      <strong>สถิติ:</strong> 235 ACS,
+                      <span class="highlight-data">1.16 K/D</span>
+                    </li>
                   </ul>
                   <div class="player-stat-highlight">
                     <canvas
@@ -1321,7 +1352,7 @@
 
         <div class="coaches">
           <div class="coach-info">
-            <img class="coach-photo" src="img/coaches/Milan.png" alt="Milan" />
+            <img class="coach-photo" src="img/coaches/milan.png" alt="Milan" />
             <h4>Fnatic Coaching Staff</h4>
             <p>
               <strong>Milan</strong>
@@ -1386,14 +1417,20 @@
         <div class="key-comparison">
           <h3>Key Performance Indicators</h3>
           <div class="vs-highlight">
-            <span>Fnatic: <span class="highlight-data">80%</span> Win Rate</span>
+            <span
+              >Fnatic: <span class="highlight-data">80%</span> Win Rate</span
+            >
             <span class="vs-label">VS</span>
-            <span>Paper Rex: <span class="highlight-data">80%</span> Win Rate</span>
+            <span
+              >Paper Rex: <span class="highlight-data">80%</span> Win Rate</span
+            >
           </div>
           <div class="vs-highlight">
             <span>Fnatic: <span class="highlight-data">65%</span> Defense</span>
             <span class="vs-label">VS</span>
-            <span>Paper Rex: <span class="highlight-data">60%</span> Attack</span>
+            <span
+              >Paper Rex: <span class="highlight-data">60%</span> Attack</span
+            >
           </div>
         </div>
         <canvas id="teamStatsChart" height="120"></canvas>
@@ -1676,7 +1713,7 @@
                 backgroundColor: ["#FF5900", "#8000FF", "#8000FF", "#8000FF"],
                 borderWidth: 2,
                 borderColor: ["#FF7000", "#FF0080", "#FF0080", "#FF0080"],
-                borderRadius: 6
+                borderRadius: 6,
               },
             ],
           },
