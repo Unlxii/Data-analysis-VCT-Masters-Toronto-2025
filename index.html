@@ -4,395 +4,558 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VCT Masters Toronto 2025 - Grand Final Analysis</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      :root {
+        --main-bg: #fafbfc;
+        --card-bg: #fff;
+        --primary: #232323;
+        --secondary: #444;
+        --accent: #e0e0e0;
+        --border: #e5e7eb;
+        --highlight: #f5f5f5;
+        --fnatic: #ff6600;
+        --prx: #222;
       }
-
       body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          sans-serif;
-        background: #ffffff;
-        color: #1a1a1a;
-        line-height: 1.6;
+        font-family: "Segoe UI", "Roboto", "Prompt", "Kanit", Arial, sans-serif;
+        background: var(--main-bg);
+        color: var(--primary);
+        line-height: 1.7;
         min-height: 100vh;
       }
-
       .container {
-        max-width: 1000px;
+        max-width: 1100px;
         margin: 0 auto;
-        padding: 40px 20px;
+        padding: 48px 20px 32px 20px;
+        background: var(--card-bg);
+        border-radius: 18px;
+        box-shadow: 0 4px 32px 0 rgba(40, 40, 40, 0.07);
       }
-
       .header {
         text-align: center;
-        margin-bottom: 60px;
-        padding-bottom: 20px;
-        border-bottom: 2px solid #000;
+        margin-bottom: 56px;
+        padding-bottom: 18px;
+        border-bottom: 2px solid var(--border);
       }
-
       .header h1 {
-        font-size: 2.5em;
-        font-weight: 300;
-        margin-bottom: 10px;
+        font-size: 2.7em;
+        font-weight: 600;
+        margin-bottom: 8px;
         letter-spacing: -1px;
+        color: var(--primary);
       }
-
       .header p {
-        font-size: 1.1em;
-        color: #666;
+        font-size: 1.15em;
+        color: var(--secondary);
         font-weight: 400;
       }
-
       .vs-section {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 60px 0;
-        padding: 40px 0;
-        border-top: 1px solid #e0e0e0;
-        border-bottom: 1px solid #e0e0e0;
+        margin: 48px 0 36px 0;
+        padding: 32px 0;
+        border-radius: 12px;
+        background: var(--highlight);
+        box-shadow: 0 2px 12px 0 rgba(40, 40, 40, 0.04);
       }
-
       .team {
         text-align: center;
         flex: 1;
       }
-
-      .team-logo {
-        width: 80px;
-        height: 80px;
-        background: #000;
+      .team-logo-img {
+        width: 84px;
+        height: 84px;
+        object-fit: contain;
         border-radius: 50%;
-        margin: 0 auto 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5em;
-        font-weight: bold;
-        color: #fff;
+        background: #fff;
+        border: 2px solid var(--accent);
+        margin: 0 auto 18px;
+        box-shadow: 0 2px 8px 0 rgba(40, 40, 40, 0.08);
+        display: block;
       }
-
       .team h2 {
-        font-size: 1.8em;
-        font-weight: 400;
-        margin-bottom: 10px;
-      }
-
-      .vs {
-        font-size: 2em;
-        font-weight: 300;
-        color: #666;
-        margin: 0 40px;
-      }
-
-      .section {
-        margin: 50px 0;
-        padding: 30px 0;
-      }
-
-      .section h2 {
-        color: #000;
-        margin-bottom: 30px;
-        font-size: 1.5em;
+        font-size: 1.7em;
         font-weight: 500;
+        margin-bottom: 6px;
+        color: var(--primary);
+      }
+      .vs {
+        font-size: 2.2em;
+        font-weight: 400;
+        color: var(--accent);
+        margin: 0 36px;
+        letter-spacing: 2px;
+      }
+      .section {
+        margin: 44px 0 32px 0;
+        padding: 24px 0 0 0;
+      }
+      .section h2 {
+        color: var(--primary);
+        margin-bottom: 24px;
+        font-size: 1.35em;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 1px;
-        border-bottom: 1px solid #000;
-        padding-bottom: 10px;
+        border-bottom: 1.5px solid var(--accent);
+        padding-bottom: 8px;
       }
-
       .roster-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        margin-top: 30px;
+        gap: 32px;
+        margin-top: 24px;
       }
-
       .team-roster {
-        background: #fafafa;
-        padding: 30px;
-        border: 1px solid #e0e0e0;
+        background: var(--highlight);
+        padding: 28px 20px;
+        border: 1px solid var(--accent);
+        border-radius: 12px;
+        box-shadow: 0 1px 6px 0 rgba(40, 40, 40, 0.03);
       }
-
       .team-roster h3 {
-        color: #000;
-        margin-bottom: 20px;
-        font-size: 1.3em;
-        font-weight: 500;
+        color: var(--primary);
+        margin-bottom: 16px;
+        font-size: 1.18em;
+        font-weight: 600;
         text-align: center;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--accent);
+        letter-spacing: 0.5px;
       }
-
       .player {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 0;
-        border-bottom: 1px solid #eee;
+        align-items: flex-start;
+        padding: 13px 0;
+        border-bottom: 1px solid var(--accent);
+        gap: 16px;
       }
-
       .player:last-child {
         border-bottom: none;
       }
-
+      .player-photo {
+        width: 96px;
+        height: 96px;
+        border-radius: 18px;
+        object-fit: cover;
+        border: 2.5px solid #232323;
+        background: #fff;
+        margin-right: 18px;
+        box-shadow: 0 2px 8px 0 rgba(40, 40, 40, 0.12);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .player-photo:hover {
+        transform: scale(1.08);
+        box-shadow: 0 6px 18px 0 rgba(40, 40, 40, 0.18);
+      }
       .player-info {
         flex: 1;
       }
-
       .player-name {
-        font-weight: 600;
-        color: #000;
-        font-size: 1.1em;
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 1.08em;
+        margin-bottom: 2px;
       }
-
       .player-role {
-        font-size: 0.9em;
-        color: #666;
+        font-size: 0.97em;
+        color: var(--secondary);
         margin: 2px 0;
       }
-
       .player-agents {
-        font-size: 0.8em;
-        color: #999;
+        font-size: 0.89em;
+        color: #888;
+        margin-bottom: 2px;
       }
-
+      .player-detail ul {
+        margin-left: 0.7em;
+        margin-top: 4px;
+        margin-bottom: 0;
+        padding-left: 1em;
+        color: var(--primary);
+        font-size: 0.97em;
+      }
+      .player-detail li {
+        margin-bottom: 2px;
+        line-height: 1.5;
+      }
+      .player-detail strong {
+        color: var(--primary);
+        font-weight: 600;
+      }
       .stats-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-        margin-top: 30px;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 18px;
+        margin-top: 24px;
       }
-
       .stat-card {
-        background: #fafafa;
-        padding: 25px;
-        border: 1px solid #e0e0e0;
+        background: var(--highlight);
+        padding: 22px 10px;
+        border: 1px solid var(--accent);
+        border-radius: 10px;
         text-align: center;
+        box-shadow: 0 1px 6px 0 rgba(40, 40, 40, 0.03);
       }
-
       .stat-value {
-        font-size: 2.5em;
-        font-weight: 300;
-        color: #000;
-        margin-bottom: 5px;
+        font-size: 2.1em;
+        font-weight: 500;
+        color: var(--primary);
+        margin-bottom: 4px;
       }
-
       .stat-label {
-        color: #666;
-        font-size: 0.9em;
+        color: var(--secondary);
+        font-size: 0.97em;
         text-transform: uppercase;
         letter-spacing: 0.5px;
       }
-
+      .stat-bar {
+        height: 8px;
+        border-radius: 4px;
+        margin-top: 8px;
+        background: var(--accent);
+        overflow: hidden;
+      }
+      .stat-bar-inner {
+        height: 100%;
+        border-radius: 4px;
+        background: linear-gradient(90deg, #232323 0%, #888 100%);
+        transition: width 1s;
+      }
       .map-pool {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 20px;
-        margin-top: 30px;
+        gap: 18px;
+        margin-top: 24px;
       }
-
       .map-card {
-        background: #fafafa;
-        padding: 20px;
-        border: 1px solid #e0e0e0;
+        background: var(--highlight);
+        padding: 18px 8px;
+        border: 1px solid var(--accent);
+        border-radius: 10px;
         text-align: center;
+        box-shadow: 0 1px 6px 0 rgba(40, 40, 40, 0.03);
       }
-
       .map-name {
-        font-weight: 600;
-        margin-bottom: 15px;
-        color: #000;
-        font-size: 1.1em;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: var(--primary);
+        font-size: 1.08em;
       }
-
       .win-rates {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 6px;
       }
-
       .win-rate {
-        padding: 8px;
-        border: 1px solid #ddd;
-        font-size: 0.9em;
+        padding: 7px;
+        border: 1px solid var(--accent);
+        font-size: 0.97em;
         background: #fff;
+        border-radius: 6px;
+        color: var(--primary);
       }
-
       .coaches {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        margin-top: 30px;
+        gap: 32px;
+        margin-top: 24px;
       }
-
       .coach-info {
         text-align: center;
-        padding: 25px;
-        background: #fafafa;
-        border: 1px solid #e0e0e0;
+        padding: 18px 0;
+        background: var(--highlight);
+        border: 1px solid var(--accent);
+        border-radius: 10px;
+        box-shadow: 0 1px 6px 0 rgba(40, 40, 40, 0.03);
       }
-
+      .coach-photo {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--accent);
+        background: #fff;
+        margin-bottom: 10px;
+        box-shadow: 0 1px 4px 0 rgba(40, 40, 40, 0.07);
+      }
       .coach-info h4 {
-        margin-bottom: 15px;
-        font-weight: 500;
-        color: #000;
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: var(--primary);
       }
-
       .style-comparison {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        margin-top: 30px;
+        gap: 32px;
+        margin-top: 24px;
       }
-
       .style-card {
-        padding: 30px;
-        border: 2px solid #000;
-        background: #fafafa;
+        padding: 22px 18px;
+        border: 2px solid var(--primary);
+        background: var(--highlight);
+        border-radius: 10px;
+        box-shadow: 0 1px 6px 0 rgba(40, 40, 40, 0.03);
       }
-
       .style-card h3 {
-        font-size: 1.3em;
-        margin-bottom: 15px;
-        font-weight: 500;
+        font-size: 1.13em;
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: var(--primary);
       }
-
       .pros-cons {
-        margin-top: 20px;
+        margin-top: 14px;
       }
-
       .pros,
       .cons {
-        margin: 15px 0;
+        margin: 10px 0;
       }
-
       .pros h4,
       .cons h4 {
         font-size: 1em;
-        margin-bottom: 8px;
-        font-weight: 500;
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: var(--primary);
       }
-
       .prediction {
-        background: #000;
+        background: linear-gradient(90deg, #232323 0%, #444 100%);
         color: #fff;
-        padding: 40px;
+        padding: 36px 10px;
         text-align: center;
-        margin-top: 50px;
+        margin-top: 40px;
+        border-radius: 14px;
+        box-shadow: 0 2px 16px 0 rgba(40, 40, 40, 0.08);
       }
-
       .prediction h2 {
         color: #fff;
-        margin-bottom: 20px;
-        font-size: 1.5em;
-        font-weight: 400;
+        margin-bottom: 16px;
+        font-size: 1.3em;
+        font-weight: 600;
         border-bottom: 1px solid #fff;
+        padding-bottom: 6px;
       }
-
       .prediction-score {
-        font-size: 2.5em;
-        font-weight: 300;
-        margin: 25px 0;
+        font-size: 2.2em;
+        font-weight: 500;
+        margin: 18px 0;
         letter-spacing: 2px;
+        color: #fff;
       }
-
       .prediction p {
-        margin: 15px 0;
+        margin: 12px 0;
         font-size: 1em;
         line-height: 1.7;
+        color: #e0e0e0;
       }
-
       .export-section {
         position: fixed;
         top: 20px;
         right: 20px;
         z-index: 1000;
       }
-
       .export-btn {
-        background: #000;
+        background: #232323;
         color: #fff;
         border: none;
-        padding: 12px 20px;
+        padding: 11px 18px;
         font-size: 14px;
         cursor: pointer;
         margin: 5px;
         text-transform: uppercase;
         letter-spacing: 1px;
         font-weight: 500;
+        border-radius: 6px;
+        box-shadow: 0 1px 6px 0 rgba(40, 40, 40, 0.07);
+        transition: background 0.2s;
       }
-
       .export-btn:hover {
-        background: #333;
+        background: #444;
       }
-
-      .share-url {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        right: 20px;
+      .highlight {
+        background: #232323;
+        color: #fff;
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-weight: bold;
+      }
+      .fade-in {
+        animation: fadeIn 1.2s;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .player-highlight {
         background: #f5f5f5;
-        padding: 15px;
-        border: 1px solid #ddd;
-        font-family: monospace;
-        font-size: 12px;
-        word-break: break-all;
+        border-left: 4px solid #232323;
+        padding: 10px 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        color: var(--primary);
+        font-size: 1em;
       }
-
+      .fun-fact {
+        background: #f5f5f5;
+        border-left: 4px solid #232323;
+        padding: 10px 15px;
+        margin: 15px 0;
+        border-radius: 8px;
+        font-size: 0.99em;
+        color: var(--primary);
+      }
       @media print {
-        .export-section,
-        .share-url {
+        .export-section {
           display: none;
         }
-
         body {
           background: white;
         }
-
         .section {
           page-break-inside: avoid;
         }
       }
-
-      @media (max-width: 768px) {
-        .vs-section {
-          flex-direction: column;
-          gap: 30px;
+      @media (max-width: 900px) {
+        .container {
+          padding: 24px 2vw;
         }
-
-        .vs {
-          margin: 0;
-          font-size: 1.5em;
-        }
-
         .roster-grid,
         .style-comparison,
         .coaches {
           grid-template-columns: 1fr;
-          gap: 20px;
+          gap: 18px;
         }
-
+        .vs-section {
+          flex-direction: column;
+          gap: 18px;
+        }
+        .vs {
+          margin: 0;
+          font-size: 1.3em;
+        }
         .export-section {
           position: static;
           text-align: center;
-          margin-bottom: 30px;
-        }
-
-        .share-url {
-          position: static;
-          margin-top: 30px;
+          margin-bottom: 24px;
         }
       }
+      .player-stat-highlight {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-top: 10px;
+      }
+      .player-stat-chart {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 1px 6px 0 rgba(40, 40, 40, 0.07);
+        border: 1.5px solid #e0e0e0;
+      }
+      .stat-blocks {
+        display: flex;
+        gap: 10px;
+      }
+      .stat-block {
+        background: #232323;
+        color: #fff;
+        border-radius: 8px;
+        padding: 8px 14px 6px 14px;
+        text-align: center;
+        min-width: 60px;
+        box-shadow: 0 2px 8px 0 rgba(40, 40, 40, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .stat-label {
+        font-size: 0.85em;
+        color: #1f1f1f;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 2px;
+        text-transform: uppercase;
+      }
+      .stat-value {
+        font-size: 1.35em;
+        font-weight: bold;
+        color: #fff;
+        letter-spacing: 1px;
+      }
+      /* PRX theme color overrides */
+      .team-roster:nth-of-type(2) .stat-block {
+        background: #0000ff;
+        color: #fff;
+      }
+      .team-roster:nth-of-type(2) .stat-label {
+        color: #ff0080;
+      }
+      .team-roster:nth-of-type(2) .stat-bar-inner {
+        background: linear-gradient(90deg, #8000ff 0%, #ff0080 100%) !important;
+      }
+      .team-roster:nth-of-type(2) .player-stat-chart {
+        border: 1.5px solid #8000ff;
+        background: #fff;
+      }
+      .team-roster:nth-of-type(2) .player-info,
+      .team-roster:nth-of-type(2) .player-name,
+      .team-roster:nth-of-type(2) .player-role {
+        color: #000000;
+      }
+      .team-roster:nth-of-type(2) {
+        background: #fff;
+        border-color: #8000ff;
+      }
+      .team-roster:nth-of-type(2) h3 {
+        color: #8000ff;
+        border-bottom: 1px solid #ff0080;
+      }
+      .team-roster:nth-of-type(2) .player-detail strong {
+        color: #8000ff;
+      }
+      /* Fnatic theme color overrides */
+      .team-roster:nth-of-type(1) .stat-block {
+        background: #ff5900;
+        color: #fff;
+      }
+      .team-roster:nth-of-type(1) .stat-label {
+        color: #ff7000;
+      }
+      .team-roster:nth-of-type(1) .stat-bar-inner {
+        background: linear-gradient(90deg, #ff5900 0%, #ff7000 100%) !important;
+      }
+      .team-roster:nth-of-type(1) .player-stat-chart {
+        border: 1.5px solid #ff5900;
+        background: #fff;
+      }
+      .team-roster:nth-of-type(1) .player-info,
+      .team-roster:nth-of-type(1) .player-name,
+      .team-roster:nth-of-type(1) .player-role {
+        color: #1f1f1f;
+      }
+      .team-roster:nth-of-type(1) {
+        background: #fff;
+        border-color: #ff5900;
+      }
+      .team-roster:nth-of-type(1) h3 {
+        color: #ff5900;
+        border-bottom: 1px solid #ff7000;
+      }
+      .team-roster:nth-of-type(1) .player-detail strong {
+        color: #ff5900;
+      }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   </head>
   <body>
     <div class="export-section">
-      <button class="export-btn" onclick="exportToPDF()">Export PDF</button>
       <button class="export-btn" onclick="printPage()">Print</button>
     </div>
 
@@ -404,54 +567,405 @@
 
       <div class="vs-section">
         <div class="team">
-          <div class="team-logo">FNC</div>
+          <img
+            class="team-logo-img"
+            src="img/fnatic-logo.png"
+            alt="Fnatic Logo"
+            style="object-fit: cover"
+          />
           <h2>Fnatic</h2>
         </div>
         <div class="vs">VS</div>
         <div class="team">
-          <div class="team-logo">PRX</div>
+          <img
+            class="team-logo-img"
+            src="img/prx-logo.png"
+            alt="Paper Rex Logo"
+          />
           <h2>Paper Rex</h2>
         </div>
       </div>
 
-      <div class="section">
+      <div class="section fade-in">
         <h2>Teams & Players</h2>
+        <div class="fun-fact animate__animated animate__pulse">
+          <strong>Fun Fact:</strong> ทั้งสองทีมเคยเจอกันในรอบชิงปี 2023 และ 2024
+          โดยผลัดกันชนะคนละปี!
+        </div>
         <div class="roster-grid">
           <div class="team-roster">
             <h3>Fnatic</h3>
             <div class="player">
+              <img
+                class="player-photo"
+                src="img/players/boaster.png"
+                alt="Boaster"
+              />
               <div class="player-info">
-                <div class="player-name">Boaster</div>
+                <div class="player-name">
+                  Boaster
+                  <img
+                    src="img/flags/uk.png"
+                    alt="UK"
+                    title="United Kingdom"
+                    style="
+                      width: 20px;
+                      vertical-align: middle;
+                      margin-left: 4px;
+                    "
+                  />
+                </div>
                 <div class="player-role">IGL / Controller</div>
-                <div class="player-agents">Omen, Astra, Viper</div>
+                <div class="player-agents">
+                  <img
+                    src="img/agents/omen.png"
+                    alt="Omen"
+                    title="Omen"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/astra.png"
+                    alt="Astra"
+                    title="Astra"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/viper.png"
+                    alt="Viper"
+                    title="Viper"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                </div>
+                <div class="player-detail">
+                  <ul>
+                    <li>
+                      <strong>สไตล์:</strong> เน้นวางแผนรอบลึก สร้างจังหวะให้ทีม
+                    </li>
+                    <li>
+                      <strong>จุดแข็ง:</strong> mid-round call, clutch play
+                    </li>
+                    <li><strong>จุดอ่อน:</strong> ฟอร์มขึ้นลงในรอบสำคัญ</li>
+                    <li>
+                      <strong>สถิติ:</strong> 1.12 K/D, 75% post-plant win
+                    </li>
+                  </ul>
+                  <div class="player-stat-highlight">
+                    <canvas
+                      class="player-stat-chart"
+                      width="120"
+                      height="60"
+                    ></canvas>
+                    <div class="stat-blocks">
+                      <div class="stat-block">
+                        <span class="stat-label">ACS</span>
+                        <span class="stat-value">308</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">K/D</span>
+                        <span class="stat-value">1.25</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">FB%</span>
+                        <span class="stat-value">48%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="player">
+              <img
+                class="player-photo"
+                src="img/players/crashies.png"
+                alt="crashies"
+                style="object-position: center top"
+              />
               <div class="player-info">
-                <div class="player-name">crashies</div>
+                <div class="player-name">
+                  crashies
+                  <img
+                    src="img/flags/us.png"
+                    alt="USA"
+                    title="USA"
+                    style="
+                      width: 20px;
+                      vertical-align: middle;
+                      margin-left: 4px;
+                    "
+                  />
+                </div>
                 <div class="player-role">Initiator</div>
-                <div class="player-agents">Fade, Sova</div>
+                <div class="player-agents">
+                  <img
+                    src="img/agents/fade.png"
+                    alt="Fade"
+                    title="Fade"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/sova.png"
+                    alt="Sova"
+                    title="Sova"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                </div>
+                <div class="player-detail">
+                  <ul>
+                    <li>
+                      <strong>สไตล์:</strong> ข้อมูลแน่น เปิดพื้นที่ให้ทีม
+                    </li>
+                    <li>
+                      <strong>จุดแข็ง:</strong> assist สูง, utility usage ดี
+                    </li>
+                    <li><strong>จุดอ่อน:</strong> entry frag ต่ำ</li>
+                    <li><strong>สถิติ:</strong> 1.18 K/D, 210 assists</li>
+                  </ul>
+                  <div class="player-stat-highlight">
+                    <canvas
+                      class="player-stat-chart"
+                      width="120"
+                      height="60"
+                    ></canvas>
+                    <div class="stat-blocks">
+                      <div class="stat-block">
+                        <span class="stat-label">ACS</span>
+                        <span class="stat-value">210</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">K/D</span>
+                        <span class="stat-value">1.18</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">FB%</span>
+                        <span class="stat-value">38%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="player">
+              <img
+                class="player-photo"
+                src="img/players/alfajer.png"
+                alt="Alfajer"
+              />
               <div class="player-info">
-                <div class="player-name">Alfajer</div>
+                <div class="player-name">
+                  Alfajer
+                  <img
+                    src="img/flags/tr.png"
+                    alt="Turkey"
+                    title="Turkey"
+                    style="
+                      width: 20px;
+                      vertical-align: middle;
+                      margin-left: 4px;
+                    "
+                  />
+                </div>
                 <div class="player-role">Sentinel</div>
-                <div class="player-agents">Killjoy, Chamber</div>
+                <div class="player-agents">
+                  <img
+                    src="img/agents/killjoy.png"
+                    alt="Killjoy"
+                    title="Killjoy"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/chamber.png"
+                    alt="Chamber"
+                    title="Chamber"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/raze.png"
+                    alt="Raze"
+                    title="Raze"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                </div>
+                <div class="player-detail">
+                  <ul>
+                    <li><strong>สไตล์:</strong> anchor site, clutch เก่ง</li>
+                    <li><strong>จุดแข็ง:</strong> aim แม่น, multi-kill บ่อย</li>
+                    <li><strong>จุดอ่อน:</strong> บางครั้งโดน isolate</li>
+                    <li><strong>สถิติ:</strong> 308 ACS, 1.25 K/D</li>
+                  </ul>
+                  <div class="player-stat-highlight">
+                    <canvas
+                      class="player-stat-chart"
+                      width="120"
+                      height="60"
+                    ></canvas>
+                    <div class="stat-blocks">
+                      <div class="stat-block">
+                        <span class="stat-label">ACS</span>
+                        <span class="stat-value">308</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">K/D</span>
+                        <span class="stat-value">1.25</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">FB%</span>
+                        <span class="stat-value">48%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="player">
+              <img
+                class="player-photo"
+                src="img/players/chronicle.png"
+                alt="Chronicle"
+              />
               <div class="player-info">
-                <div class="player-name">Chronicle</div>
+                <div class="player-name">
+                  Chronicle
+                  <img
+                    src="img/flags/ru.png"
+                    alt="Russia"
+                    title="Russia"
+                    style="
+                      width: 20px;
+                      vertical-align: middle;
+                      margin-left: 4px;
+                    "
+                  />
+                </div>
                 <div class="player-role">Controller</div>
-                <div class="player-agents">Viper, Breach</div>
+                <div class="player-agents">
+                  <img
+                    src="img/agents/viper.png"
+                    alt="Viper"
+                    title="Viper"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/breach.png"
+                    alt="Breach"
+                    title="Breach"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/sage.png"
+                    alt="Sage"
+                    title="Sage"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/vyse.png"
+                    alt="Vyse"
+                    title="Vyse"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                </div>
+                <div class="player-detail">
+                  <ul>
+                    <li><strong>สไตล์:</strong> multi-role, utility support</li>
+                    <li><strong>จุดแข็ง:</strong> ประสบการณ์สูง, flexible</li>
+                    <li><strong>จุดอ่อน:</strong> entry kill ต่ำ</li>
+                    <li><strong>สถิติ:</strong> 1.10 K/D, 65% assist rate</li>
+                  </ul>
+                  <div class="player-stat-highlight">
+                    <canvas
+                      class="player-stat-chart"
+                      width="120"
+                      height="60"
+                    ></canvas>
+                    <div class="stat-blocks">
+                      <div class="stat-block">
+                        <span class="stat-label">ACS</span>
+                        <span class="stat-value">220</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">K/D</span>
+                        <span class="stat-value">1.10</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">FB%</span>
+                        <span class="stat-value">35%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="player">
+              <img
+                class="player-photo"
+                src="img/players/kaajak.png"
+                alt="Kaajak"
+              />
               <div class="player-info">
-                <div class="player-name">Kaajak</div>
+                <div class="player-name">
+                  Kaajak
+                  <img
+                    src="img/flags/po.png"
+                    alt="Poland"
+                    title="Poland"
+                    style="
+                      width: 20px;
+                      vertical-align: middle;
+                      margin-left: 4px;
+                    "
+                  />
+                </div>
                 <div class="player-role">Duelist</div>
-                <div class="player-agents">Yoru, Neon</div>
+                <div class="player-agents">
+                  <img
+                    src="img/agents/yoru.png"
+                    alt="Yoru"
+                    title="Yoru"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/neon.png"
+                    alt="Neon"
+                    title="Neon"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/raze.png"
+                    alt="Raze"
+                    title="Raze"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                </div>
+                <div class="player-detail">
+                  <ul>
+                    <li><strong>สไตล์:</strong> เปิดเกมเร็ว, กล้าเล่น</li>
+                    <li>
+                      <strong>จุดแข็ง:</strong> entry kill สูง, สร้าง space
+                    </li>
+                    <li><strong>จุดอ่อน:</strong> เสี่ยงตายบ่อย</li>
+                    <li><strong>สถิติ:</strong> 1.20 K/D, 60% first blood</li>
+                  </ul>
+                  <div class="player-stat-highlight">
+                    <canvas
+                      class="player-stat-chart"
+                      width="120"
+                      height="60"
+                    ></canvas>
+                    <div class="stat-blocks">
+                      <div class="stat-block">
+                        <span class="stat-label">ACS</span>
+                        <span class="stat-value">230</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">K/D</span>
+                        <span class="stat-value">1.20</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">FB%</span>
+                        <span class="stat-value">60%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -459,38 +973,371 @@
           <div class="team-roster">
             <h3>Paper Rex</h3>
             <div class="player">
+              <img
+                class="player-photo"
+                src="img/players/f0rsaken.png"
+                alt="f0rsakeN"
+              />
               <div class="player-info">
-                <div class="player-name">f0rsakeN</div>
+                <div class="player-name">
+                  f0rsakeN
+                  <img
+                    src="img/flags/id.png"
+                    alt="Indonesia"
+                    title="Indonesia"
+                    style="
+                      width: 20px;
+                      vertical-align: middle;
+                      margin-left: 4px;
+                    "
+                  />
+                </div>
                 <div class="player-role">IGL / Controller</div>
-                <div class="player-agents">Omen, Astra</div>
+                <div class="player-agents">
+                  <img
+                    src="img/agents/omen.png"
+                    alt="Omen"
+                    title="Omen"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/astra.png"
+                    alt="Astra"
+                    title="Astra"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/sova.png"
+                    alt="Sova"
+                    title="Sova"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                </div>
+                <div class="player-detail">
+                  <ul>
+                    <li><strong>สไตล์:</strong> aggressive IGL, กล้า call</li>
+                    <li><strong>จุดแข็ง:</strong> first blood, entry play</li>
+                    <li><strong>จุดอ่อน:</strong> mid-round decision</li>
+                    <li><strong>สถิติ:</strong> 215 ACS, 1.08 K/D</li>
+                  </ul>
+                  <div class="player-stat-highlight">
+                    <canvas
+                      class="player-stat-chart"
+                      width="120"
+                      height="60"
+                    ></canvas>
+                    <div class="stat-blocks">
+                      <div class="stat-block">
+                        <span class="stat-label">ACS</span>
+                        <span class="stat-value">215</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">K/D</span>
+                        <span class="stat-value">1.08</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">FB%</span>
+                        <span class="stat-value">38%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="player">
+              <img
+                class="player-photo"
+                src="img/players/jinggg.png"
+                alt="Jinggg"
+              />
               <div class="player-info">
-                <div class="player-name">Jinggg</div>
+                <div class="player-name">
+                  Jinggg
+                  <img
+                    src="img/flags/sg.png"
+                    alt="Singapore"
+                    title="Singapore"
+                    style="
+                      width: 20px;
+                      vertical-align: middle;
+                      margin-left: 4px;
+                    "
+                  />
+                </div>
                 <div class="player-role">Duelist</div>
-                <div class="player-agents">Raze</div>
+                <div class="player-agents">
+                  <img
+                    src="img/agents/raze.png"
+                    alt="Raze"
+                    title="Raze"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/omen.png"
+                    alt="Omen"
+                    title="Omen"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/phoenix.png"
+                    alt="Phoenix"
+                    title="Phoenix"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                </div>
+                <div class="player-detail">
+                  <ul>
+                    <li><strong>สไตล์:</strong> entry fragger, ดุดัน</li>
+                    <li><strong>จุดแข็ง:</strong> entry kill สูง, clutch</li>
+                    <li><strong>จุดอ่อน:</strong> เสี่ยงตาย, บางรอบใจร้อน</li>
+                    <li><strong>สถิติ:</strong> 247 ACS, 1.19 K/D</li>
+                  </ul>
+                  <div class="player-stat-highlight">
+                    <canvas
+                      class="player-stat-chart"
+                      width="120"
+                      height="60"
+                    ></canvas>
+                    <div class="stat-blocks">
+                      <div class="stat-block">
+                        <span class="stat-label">ACS</span>
+                        <span class="stat-value">247</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">K/D</span>
+                        <span class="stat-value">1.19</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">FB%</span>
+                        <span class="stat-value">57%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="player">
+              <img
+                class="player-photo"
+                src="img/players/something.png"
+                alt="something"
+              />
               <div class="player-info">
-                <div class="player-name">something</div>
+                <div class="player-name">
+                  something
+                  <img
+                    src="img/flags/ru.png"
+                    alt="Russia"
+                    title="Russia"
+                    style="
+                      width: 20px;
+                      vertical-align: middle;
+                      margin-left: 4px;
+                    "
+                  />
+                </div>
                 <div class="player-role">Duelist</div>
-                <div class="player-agents">Yoru, Jett</div>
+                <div class="player-agents">
+                  <img
+                    src="img/agents/yoru.png"
+                    alt="Yoru"
+                    title="Yoru"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/jett.png"
+                    alt="Jett"
+                    title="Jett"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/sova.png"
+                    alt="Sova"
+                    title="Sova"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                </div>
+                <div class="player-detail">
+                  <ul>
+                    <li><strong>สไตล์:</strong> outplay, highlight play</li>
+                    <li><strong>จุดแข็ง:</strong> aim โหด, 1vX clutch</li>
+                    <li><strong>จุดอ่อน:</strong> บางรอบเล่นเสี่ยง</li>
+                    <li><strong>สถิติ:</strong> 235 ACS, 1.16 K/D</li>
+                  </ul>
+                  <div class="player-stat-highlight">
+                    <canvas
+                      class="player-stat-chart"
+                      width="120"
+                      height="60"
+                    ></canvas>
+                    <div class="stat-blocks">
+                      <div class="stat-block">
+                        <span class="stat-label">ACS</span>
+                        <span class="stat-value">235</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">K/D</span>
+                        <span class="stat-value">1.16</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">FB%</span>
+                        <span class="stat-value">53%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="player">
+              <img
+                class="player-photo"
+                src="img/players/patmen.png"
+                alt="PatMen"
+              />
               <div class="player-info">
-                <div class="player-name">PatMen</div>
+                <div class="player-name">
+                  PatMen
+                  <img
+                    src="img/flags/ph.png"
+                    alt="Philippines"
+                    title="Philippines"
+                    style="
+                      width: 20px;
+                      vertical-align: middle;
+                      margin-left: 4px;
+                    "
+                  />
+                </div>
                 <div class="player-role">Initiator</div>
-                <div class="player-agents">Fade, Viper</div>
+                <div class="player-agents">
+                  <img
+                    src="img/agents/fade.png"
+                    alt="Fade"
+                    title="Fade"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/viper.png"
+                    alt="Viper"
+                    title="Viper"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/kayio.png"
+                    alt="kayio"
+                    title="kayio"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                </div>
+                <div class="player-detail">
+                  <ul>
+                    <li>
+                      <strong>สไตล์:</strong> utility support, เปิดเกมให้เพื่อน
+                    </li>
+                    <li><strong>จุดแข็ง:</strong> assist สูง, info play</li>
+                    <li><strong>จุดอ่อน:</strong> firepower ต่ำ</li>
+                    <li><strong>สถิติ:</strong> 1.05 K/D, 180 assists</li>
+                  </ul>
+                  <div class="player-stat-highlight">
+                    <canvas
+                      class="player-stat-chart"
+                      width="120"
+                      height="60"
+                    ></canvas>
+                    <div class="stat-blocks">
+                      <div class="stat-block">
+                        <span class="stat-label">ACS</span>
+                        <span class="stat-value">180</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">K/D</span>
+                        <span class="stat-value">1.05</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">FB%</span>
+                        <span class="stat-value">29%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="player">
+              <img
+                class="player-photo"
+                src="img/players/d4v41.png"
+                alt="d4v41"
+              />
               <div class="player-info">
-                <div class="player-name">d4v41</div>
+                <div class="player-name">
+                  d4v41
+                  <img
+                    src="img/flags/my.png"
+                    alt="Malaysia"
+                    title="Malaysia"
+                    style="
+                      width: 20px;
+                      vertical-align: middle;
+                      margin-left: 4px;
+                    "
+                  />
+                </div>
                 <div class="player-role">Sentinel</div>
-                <div class="player-agents">Killjoy, Viper</div>
+                <div class="player-agents">
+                  <img
+                    src="img/agents/killjoy.png"
+                    alt="Killjoy"
+                    title="Killjoy"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/viper.png"
+                    alt="Viper"
+                    title="Viper"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/sage.png"
+                    alt="Sage"
+                    title="Sage"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                  <img
+                    src="img/agents/vyse.png"
+                    alt="Vyse"
+                    title="Vyse"
+                    style="width: 22px; vertical-align: middle"
+                  />
+                </div>
+                <div class="player-detail">
+                  <ul>
+                    <li><strong>สไตล์:</strong> anchor, lurk</li>
+                    <li><strong>จุดแข็ง:</strong> clutch, late round</li>
+                    <li><strong>จุดอ่อน:</strong> entry kill ต่ำ</li>
+                    <li><strong>สถิติ:</strong> 1.10 K/D, 70% site hold</li>
+                  </ul>
+                  <div class="player-stat-highlight">
+                    <canvas
+                      class="player-stat-chart"
+                      width="120"
+                      height="60"
+                    ></canvas>
+                    <div class="stat-blocks">
+                      <div class="stat-block">
+                        <span class="stat-label">ACS</span>
+                        <span class="stat-value">198</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">K/D</span>
+                        <span class="stat-value">1.10</span>
+                      </div>
+                      <div class="stat-block">
+                        <span class="stat-label">FB%</span>
+                        <span class="stat-value">32%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -498,50 +1345,140 @@
 
         <div class="coaches">
           <div class="coach-info">
+            <img class="coach-photo" src="img/coaches/Milan.png" alt="Milan" />
             <h4>Fnatic Coaching Staff</h4>
-            <p><strong>Milan</strong> - Head Coach</p>
-            <p><strong>Scuttt</strong> - Performance Coach</p>
+            <p>
+              <strong>Milan</strong>
+              <img
+                src="img/flags/ne.png"
+                alt="Netherlands"
+                title="Netherlands"
+                style="width: 20px; vertical-align: middle; margin-left: 4px"
+              />
+              - Head Coach
+            </p>
+            <p>
+              <strong>Scuttt</strong>
+              <img
+                src="img/flags/ir.png"
+                alt="Ireland"
+                title="Ireland"
+                style="width: 20px; vertical-align: middle; margin-left: 4px"
+              />
+              - Performance Coach
+            </p>
           </div>
           <div class="coach-info">
+            <img
+              class="coach-photo"
+              src="img/coaches/alecks.png"
+              alt="Alecks"
+            />
             <h4>Paper Rex Coaching Staff</h4>
-            <p><strong>Alecks</strong> - Head Coach</p>
-            <p><strong>mindfreak</strong> - Assistant Coach</p>
+            <p>
+              <strong>Alecks</strong>
+              <img
+                src="img/flags/fr.png"
+                alt="France"
+                title="France"
+                style="width: 20px; vertical-align: middle; margin-left: 4px"
+              />
+              - Head Coach
+            </p>
+            <p>
+              <strong>mindfreak</strong>
+              <img
+                src="img/flags/id.png"
+                alt="Indonesia"
+                title="Indonesia"
+                style="width: 20px; vertical-align: middle; margin-left: 4px"
+              />
+              - Assistant Coach
+            </p>
           </div>
+        </div>
+        <div class="player-highlight">
+          <strong>Key Matchup:</strong>
+          <span class="highlight">Alfajer</span> (Fnatic) vs
+          <span class="highlight">Jinggg</span> (Paper Rex) -
+          สองดาวรุ่งที่มีสไตล์การเล่นต่างกันสุดขั้ว!
         </div>
       </div>
 
-      <div class="section">
+      <div class="section fade-in">
         <h2>2025 Performance Statistics</h2>
+        <canvas id="teamStatsChart" height="120"></canvas>
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-value">80%</div>
             <div class="stat-label">Fnatic Win Rate (Masters)</div>
+            <div class="stat-bar">
+              <div
+                class="stat-bar-inner"
+                style="width: 80%; background: #ff5900"
+              ></div>
+            </div>
           </div>
           <div class="stat-card">
             <div class="stat-value">80%</div>
             <div class="stat-label">Paper Rex Win Rate (Masters)</div>
+            <div class="stat-bar">
+              <div
+                class="stat-bar-inner"
+                style="width: 80%; background: #8000ff"
+              ></div>
+            </div>
           </div>
           <div class="stat-card">
             <div class="stat-value">65%</div>
             <div class="stat-label">Fnatic Defense Efficiency</div>
+            <div class="stat-bar">
+              <div
+                class="stat-bar-inner"
+                style="width: 65%; background: #ff5900"
+              ></div>
+            </div>
           </div>
           <div class="stat-card">
             <div class="stat-value">60%</div>
             <div class="stat-label">Paper Rex Attack Win Rate</div>
+            <div class="stat-bar">
+              <div
+                class="stat-bar-inner"
+                style="width: 60%; background: #8000ff"
+              ></div>
+            </div>
           </div>
           <div class="stat-card">
             <div class="stat-value">23%</div>
             <div class="stat-label">Fnatic Clutch Rate</div>
+            <div class="stat-bar">
+              <div
+                class="stat-bar-inner"
+                style="width: 23%; background: #ff5900"
+              ></div>
+            </div>
           </div>
           <div class="stat-card">
             <div class="stat-value">57%</div>
             <div class="stat-label">PRX First Blood Rate</div>
+            <div class="stat-bar">
+              <div
+                class="stat-bar-inner"
+                style="width: 57%; background: #8000ff"
+              ></div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="section">
+      <div class="section fade-in">
         <h2>Map Pool Analysis</h2>
+        <div class="fun-fact">
+          <strong>Did you know?</strong>
+          <span class="highlight">Icebox</span> เป็นแผนที่ที่ Fnatic
+          ชนะน้อยที่สุดในปีนี้!
+        </div>
         <div class="map-pool">
           <div class="map-card">
             <div class="map-name">Lotus</div>
@@ -581,7 +1518,7 @@
         </div>
       </div>
 
-      <div class="section">
+      <div class="section fade-in">
         <h2>Playing Styles</h2>
         <div class="style-comparison">
           <div class="style-card">
@@ -618,10 +1555,15 @@
             </div>
           </div>
         </div>
+        <div class="fun-fact">
+          <strong>Insight:</strong> Fnatic มักจะชนะรอบสำคัญด้วยการเล่น
+          post-plant ส่วน Paper Rex ได้เปรียบเมื่อเกมเร็ว!
+        </div>
       </div>
 
-      <div class="section">
+      <div class="section fade-in">
         <h2>Key Player Statistics</h2>
+        <canvas id="playerStatsChart" height="120"></canvas>
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-value">308</div>
@@ -640,11 +1582,18 @@
             <div class="stat-label">f0rsakeN ACS (Solid IGL, Consistent)</div>
           </div>
         </div>
+        <div class="player-highlight">
+          <strong>Player to Watch:</strong>
+          <span class="highlight">Alfajer</span> มีค่า ACS
+          สูงสุดในทัวร์นาเมนต์นี้!
+        </div>
       </div>
 
-      <div class="prediction">
+      <div class="prediction fade-in">
         <h2>Match Prediction</h2>
-        <div class="prediction-score">Fnatic 3-2 Paper Rex</div>
+        <div class="prediction-score animate__animated animate__tada">
+          Fnatic 3-2 Paper Rex
+        </div>
         <p>
           <strong>Reasoning:</strong> Fnatic's strength in post-plant situations
           and defensive precision gives them the edge.
@@ -664,38 +1613,153 @@
             unpredictable playstyle.</em
           >
         </p>
+        <div class="fun-fact">
+          <strong>สถิติ:</strong> 4 ใน 5 BO5 ล่าสุดระหว่างทีมจาก EU กับ APAC
+          จบที่สกอร์ 3-2!
+        </div>
       </div>
     </div>
 
     <script>
-      function exportToPDF() {
-        const element = document.getElementById("content");
-        const opt = {
-          margin: 0.5,
-          filename: "VCT_Masters_Toronto_2025_Analysis.pdf",
-          image: { type: "jpeg", quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true },
-          jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
-        };
-
-        // Hide buttons during PDF generation
-        document.querySelector(".export-section").style.display = "none";
-        document.querySelector(".share-url").style.display = "none";
-
-        html2pdf()
-          .set(opt)
-          .from(element)
-          .save()
-          .then(() => {
-            // Show buttons again after PDF generation
-            document.querySelector(".export-section").style.display = "block";
-            document.querySelector(".share-url").style.display = "block";
-          });
-      }
-
       function printPage() {
         window.print();
       }
+      function shareToTwitter() {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent(
+          "ดูบทวิเคราะห์ VCT Masters Toronto 2025 Grand Final Fnatic vs Paper Rex!"
+        );
+        window.open(
+          `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
+          "_blank"
+        );
+      }
+
+      // Chart.js: Team Stats
+      window.onload = function () {
+        const ctx = document.getElementById("teamStatsChart").getContext("2d");
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: [
+              "Fnatic Win Rate",
+              "PRX Win Rate",
+              "Fnatic Defense",
+              "PRX Attack",
+              "Fnatic Clutch",
+              "PRX First Blood",
+            ],
+            datasets: [
+              {
+                label: "Stat (%)",
+                data: [80, 80, 65, 60, 23, 57],
+                backgroundColor: [
+                  "#FF5900",
+                  "#8000FF",
+                  "#FF5900",
+                  "#8000FF",
+                  "#FF5900",
+                  "#8000FF",
+                ],
+              },
+            ],
+          },
+          options: {
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { beginAtZero: true, max: 100 },
+            },
+          },
+        });
+
+        // Player Stats Chart
+        const ctx2 = document
+          .getElementById("playerStatsChart")
+          .getContext("2d");
+        new Chart(ctx2, {
+          type: "bar",
+          data: {
+            labels: ["Alfajer", "Jinggg", "something", "f0rsakeN"],
+            datasets: [
+              {
+                label: "ACS",
+                data: [308, 247, 235, 215],
+                backgroundColor: ["#FF5900", "#8000FF", "#8000FF", "#8000FF"],
+              },
+            ],
+          },
+          options: {
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { beginAtZero: true, max: 350 },
+            },
+          },
+        });
+
+        // Player mini stat chart for each player
+        const playerStatData = [
+          // [ACS, K/D, FB%] (ตัวอย่าง: ใส่ตามลำดับผู้เล่นในหน้า)
+          [308, 1.25, 48], // Alfajer
+          [247, 1.19, 57], // Jinggg
+          [235, 1.16, 53], // something
+          [215, 1.08, 41], // f0rsakeN
+          [210, 1.18, 38], // crashies
+          [220, 1.1, 35], // Chronicle
+          [230, 1.2, 60], // Kaajak
+          [200, 1.05, 29], // PatMen
+          [198, 1.1, 32], // d4v41
+        ];
+        document
+          .querySelectorAll(".player-stat-chart")
+          .forEach((canvas, idx) => {
+            const data = playerStatData[idx % playerStatData.length];
+            // Default: Fnatic color
+            let colors = ["#FF5900", "#FF7000", "#FFFFFF"];
+            // Find if this canvas is in PRX team-roster
+            let isPRX = false;
+            let el = canvas;
+            while (el && el.classList) {
+              if (
+                el.classList.contains("team-roster") &&
+                el.querySelector("h3") &&
+                el.querySelector("h3").textContent.includes("Paper Rex")
+              ) {
+                isPRX = true;
+                break;
+              }
+              el = el.parentElement;
+            }
+            if (isPRX) {
+              colors = ["#0000FF", "#8000FF", "#FF0080"];
+            }
+            new Chart(canvas.getContext("2d"), {
+              type: "bar",
+              data: {
+                labels: ["ACS", "K/D", "FB%"],
+                datasets: [
+                  {
+                    data: data,
+                    backgroundColor: colors,
+                    borderRadius: 6,
+                    barPercentage: 0.7,
+                    categoryPercentage: 0.7,
+                  },
+                ],
+              },
+              options: {
+                responsive: false,
+                plugins: {
+                  legend: { display: false },
+                  tooltip: { enabled: false },
+                },
+                scales: {
+                  x: { display: false },
+                  y: { display: false, min: 0, max: data[0] > 100 ? 350 : 2 },
+                },
+              },
+            });
+          });
+      };
     </script>
   </body>
 </html>
