@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VCT Masters Toronto 2025 - Grand Final Analysis</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 60px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #000;
+      }
+
+      .header h1 {
+        font-size: 2.5em;
+        font-weight: 300;
+        margin-bottom: 10px;
+        letter-spacing: -1px;
+      }
+
+      .header p {
+        font-size: 1.1em;
+        color: #666;
+        font-weight: 400;
+      }
+
+      .vs-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 60px 0;
+        padding: 40px 0;
+        border-top: 1px solid #e0e0e0;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .team {
+        text-align: center;
+        flex: 1;
+      }
+
+      .team-logo {
+        width: 80px;
+        height: 80px;
+        background: #000;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #fff;
+      }
+
+      .team h2 {
+        font-size: 1.8em;
+        font-weight: 400;
+        margin-bottom: 10px;
+      }
+
+      .vs {
+        font-size: 2em;
+        font-weight: 300;
+        color: #666;
+        margin: 0 40px;
+      }
+
+      .section {
+        margin: 50px 0;
+        padding: 30px 0;
+      }
+
+      .section h2 {
+        color: #000;
+        margin-bottom: 30px;
+        font-size: 1.5em;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 1px solid #000;
+        padding-bottom: 10px;
+      }
+
+      .roster-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin-top: 30px;
+      }
+
+      .team-roster {
+        background: #fafafa;
+        padding: 30px;
+        border: 1px solid #e0e0e0;
+      }
+
+      .team-roster h3 {
+        color: #000;
+        margin-bottom: 20px;
+        font-size: 1.3em;
+        font-weight: 500;
+        text-align: center;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .player {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .player:last-child {
+        border-bottom: none;
+      }
+
+      .player-info {
+        flex: 1;
+      }
+
+      .player-name {
+        font-weight: 600;
+        color: #000;
+        font-size: 1.1em;
+      }
+
+      .player-role {
+        font-size: 0.9em;
+        color: #666;
+        margin: 2px 0;
+      }
+
+      .player-agents {
+        font-size: 0.8em;
+        color: #999;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+      }
+
+      .stat-card {
+        background: #fafafa;
+        padding: 25px;
+        border: 1px solid #e0e0e0;
+        text-align: center;
+      }
+
+      .stat-value {
+        font-size: 2.5em;
+        font-weight: 300;
+        color: #000;
+        margin-bottom: 5px;
+      }
+
+      .stat-label {
+        color: #666;
+        font-size: 0.9em;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .map-pool {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+      }
+
+      .map-card {
+        background: #fafafa;
+        padding: 20px;
+        border: 1px solid #e0e0e0;
+        text-align: center;
+      }
+
+      .map-name {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #000;
+        font-size: 1.1em;
+      }
+
+      .win-rates {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .win-rate {
+        padding: 8px;
+        border: 1px solid #ddd;
+        font-size: 0.9em;
+        background: #fff;
+      }
+
+      .coaches {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin-top: 30px;
+      }
+
+      .coach-info {
+        text-align: center;
+        padding: 25px;
+        background: #fafafa;
+        border: 1px solid #e0e0e0;
+      }
+
+      .coach-info h4 {
+        margin-bottom: 15px;
+        font-weight: 500;
+        color: #000;
+      }
+
+      .style-comparison {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin-top: 30px;
+      }
+
+      .style-card {
+        padding: 30px;
+        border: 2px solid #000;
+        background: #fafafa;
+      }
+
+      .style-card h3 {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+        font-weight: 500;
+      }
+
+      .pros-cons {
+        margin-top: 20px;
+      }
+
+      .pros,
+      .cons {
+        margin: 15px 0;
+      }
+
+      .pros h4,
+      .cons h4 {
+        font-size: 1em;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .prediction {
+        background: #000;
+        color: #fff;
+        padding: 40px;
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      .prediction h2 {
+        color: #fff;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+        font-weight: 400;
+        border-bottom: 1px solid #fff;
+      }
+
+      .prediction-score {
+        font-size: 2.5em;
+        font-weight: 300;
+        margin: 25px 0;
+        letter-spacing: 2px;
+      }
+
+      .prediction p {
+        margin: 15px 0;
+        font-size: 1em;
+        line-height: 1.7;
+      }
+
+      .export-section {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+      }
+
+      .export-btn {
+        background: #000;
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        font-size: 14px;
+        cursor: pointer;
+        margin: 5px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 500;
+      }
+
+      .export-btn:hover {
+        background: #333;
+      }
+
+      .share-url {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        background: #f5f5f5;
+        padding: 15px;
+        border: 1px solid #ddd;
+        font-family: monospace;
+        font-size: 12px;
+        word-break: break-all;
+      }
+
+      @media print {
+        .export-section,
+        .share-url {
+          display: none;
+        }
+
+        body {
+          background: white;
+        }
+
+        .section {
+          page-break-inside: avoid;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .vs-section {
+          flex-direction: column;
+          gap: 30px;
+        }
+
+        .vs {
+          margin: 0;
+          font-size: 1.5em;
+        }
+
+        .roster-grid,
+        .style-comparison,
+        .coaches {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .export-section {
+          position: static;
+          text-align: center;
+          margin-bottom: 30px;
+        }
+
+        .share-url {
+          position: static;
+          margin-top: 30px;
+        }
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  </head>
+  <body>
+    <div class="export-section">
+      <button class="export-btn" onclick="exportToPDF()">Export PDF</button>
+      <button class="export-btn" onclick="printPage()">Print</button>
+      <button class="export-btn" onclick="copyURL()">Copy URL</button>
+    </div>
+
+    <div class="container" id="content">
+      <div class="header">
+        <h1>VCT Masters Toronto 2025</h1>
+        <p>Grand Final (BO5) - Data Analysis</p>
+      </div>
+
+      <div class="vs-section">
+        <div class="team">
+          <div class="team-logo">FNC</div>
+          <h2>Fnatic</h2>
+        </div>
+        <div class="vs">VS</div>
+        <div class="team">
+          <div class="team-logo">PRX</div>
+          <h2>Paper Rex</h2>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Teams & Players</h2>
+        <div class="roster-grid">
+          <div class="team-roster">
+            <h3>Fnatic</h3>
+            <div class="player">
+              <div class="player-info">
+                <div class="player-name">Boaster</div>
+                <div class="player-role">IGL / Controller</div>
+                <div class="player-agents">Omen, Astra, Viper</div>
+              </div>
+            </div>
+            <div class="player">
+              <div class="player-info">
+                <div class="player-name">crashies</div>
+                <div class="player-role">Initiator</div>
+                <div class="player-agents">Fade, Sova</div>
+              </div>
+            </div>
+            <div class="player">
+              <div class="player-info">
+                <div class="player-name">Alfajer</div>
+                <div class="player-role">Sentinel</div>
+                <div class="player-agents">Killjoy, Chamber</div>
+              </div>
+            </div>
+            <div class="player">
+              <div class="player-info">
+                <div class="player-name">Chronicle</div>
+                <div class="player-role">Controller</div>
+                <div class="player-agents">Viper, Breach</div>
+              </div>
+            </div>
+            <div class="player">
+              <div class="player-info">
+                <div class="player-name">Kaajak</div>
+                <div class="player-role">Duelist</div>
+                <div class="player-agents">Yoru, Neon</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="team-roster">
+            <h3>Paper Rex</h3>
+            <div class="player">
+              <div class="player-info">
+                <div class="player-name">f0rsakeN</div>
+                <div class="player-role">IGL / Controller</div>
+                <div class="player-agents">Omen, Astra</div>
+              </div>
+            </div>
+            <div class="player">
+              <div class="player-info">
+                <div class="player-name">Jinggg</div>
+                <div class="player-role">Duelist</div>
+                <div class="player-agents">Raze</div>
+              </div>
+            </div>
+            <div class="player">
+              <div class="player-info">
+                <div class="player-name">something</div>
+                <div class="player-role">Duelist</div>
+                <div class="player-agents">Yoru, Jett</div>
+              </div>
+            </div>
+            <div class="player">
+              <div class="player-info">
+                <div class="player-name">PatMen</div>
+                <div class="player-role">Initiator</div>
+                <div class="player-agents">Fade, Viper</div>
+              </div>
+            </div>
+            <div class="player">
+              <div class="player-info">
+                <div class="player-name">d4v41</div>
+                <div class="player-role">Sentinel</div>
+                <div class="player-agents">Killjoy, Viper</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="coaches">
+          <div class="coach-info">
+            <h4>Fnatic Coaching Staff</h4>
+            <p><strong>Milan</strong> - Head Coach</p>
+            <p><strong>Scuttt</strong> - Performance Coach</p>
+          </div>
+          <div class="coach-info">
+            <h4>Paper Rex Coaching Staff</h4>
+            <p><strong>Alecks</strong> - Head Coach</p>
+            <p><strong>mindfreak</strong> - Assistant Coach</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>2025 Performance Statistics</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value">80%</div>
+            <div class="stat-label">Fnatic Win Rate (Masters)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">80%</div>
+            <div class="stat-label">Paper Rex Win Rate (Masters)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">65%</div>
+            <div class="stat-label">Fnatic Defense Efficiency</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">60%</div>
+            <div class="stat-label">Paper Rex Attack Win Rate</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">23%</div>
+            <div class="stat-label">Fnatic Clutch Rate</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">57%</div>
+            <div class="stat-label">PRX First Blood Rate</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Map Pool Analysis</h2>
+        <div class="map-pool">
+          <div class="map-card">
+            <div class="map-name">Lotus</div>
+            <div class="win-rates">
+              <div class="win-rate">Fnatic: Strong</div>
+              <div class="win-rate">Paper Rex: Strong</div>
+            </div>
+          </div>
+          <div class="map-card">
+            <div class="map-name">Ascent</div>
+            <div class="win-rates">
+              <div class="win-rate">Fnatic: Very Good</div>
+              <div class="win-rate">Paper Rex: Very Good</div>
+            </div>
+          </div>
+          <div class="map-card">
+            <div class="map-name">Split</div>
+            <div class="win-rates">
+              <div class="win-rate">Fnatic: Good</div>
+              <div class="win-rate">Paper Rex: Average</div>
+            </div>
+          </div>
+          <div class="map-card">
+            <div class="map-name">Icebox</div>
+            <div class="win-rates">
+              <div class="win-rate">Fnatic: Weak</div>
+              <div class="win-rate">Paper Rex: Strong</div>
+            </div>
+          </div>
+          <div class="map-card">
+            <div class="map-name">Haven</div>
+            <div class="win-rates">
+              <div class="win-rate">Fnatic: Average</div>
+              <div class="win-rate">Paper Rex: Average</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Playing Styles</h2>
+        <div class="style-comparison">
+          <div class="style-card">
+            <h3>Fnatic</h3>
+            <p><strong>Style:</strong> Slow, Measured, Post-plant</p>
+            <div class="pros-cons">
+              <div class="pros">
+                <h4>Strengths</h4>
+                <p>
+                  • Excellent team coordination<br />• Strong utility usage for
+                  area control
+                </p>
+              </div>
+              <div class="cons">
+                <h4>Weaknesses</h4>
+                <p>• Slow starts can be exploited by fast rushes</p>
+              </div>
+            </div>
+          </div>
+          <div class="style-card">
+            <h3>Paper Rex</h3>
+            <p><strong>Style:</strong> Fast, Explosive</p>
+            <div class="pros-cons">
+              <div class="pros">
+                <h4>Strengths</h4>
+                <p>
+                  • Quick site execution<br />• Difficult to predict rotations
+                </p>
+              </div>
+              <div class="cons">
+                <h4>Weaknesses</h4>
+                <p>• Can lose momentum if rush strategies are countered</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Key Player Statistics</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value">308</div>
+            <div class="stat-label">Alfajer ACS (Accurate, High Clutch)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">247</div>
+            <div class="stat-label">Jinggg ACS (High Entry Kills)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">235</div>
+            <div class="stat-label">something ACS (Aggressive, Precise)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">215</div>
+            <div class="stat-label">f0rsakeN ACS (Solid IGL, Consistent)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prediction">
+        <h2>Match Prediction</h2>
+        <div class="prediction-score">Fnatic 3-2 Paper Rex</div>
+        <p>
+          <strong>Reasoning:</strong> Fnatic's strength in post-plant situations
+          and defensive precision gives them the edge.
+        </p>
+        <p>
+          Paper Rex's aggressive style can flip any game with their fast
+          executions.
+        </p>
+        <p>
+          This match will be extended and require high adaptability from both
+          teams.
+        </p>
+        <br />
+        <p>
+          <em
+            >Alternative: Paper Rex could reverse the score 3-2 with their
+            unpredictable playstyle.</em
+          >
+        </p>
+      </div>
+    </div>
+
+    <div class="share-url" id="shareUrl">
+      Share this analysis: หน้าเว็บนี้สามารถแชร์ URL ได้โดยตรง หรือใช้งานใน
+      Claude.ai
+    </div>
+
+    <script>
+      function exportToPDF() {
+        const element = document.getElementById("content");
+        const opt = {
+          margin: 0.5,
+          filename: "VCT_Masters_Toronto_2025_Analysis.pdf",
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true },
+          jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+        };
+
+        // Hide buttons during PDF generation
+        document.querySelector(".export-section").style.display = "none";
+        document.querySelector(".share-url").style.display = "none";
+
+        html2pdf()
+          .set(opt)
+          .from(element)
+          .save()
+          .then(() => {
+            // Show buttons again after PDF generation
+            document.querySelector(".export-section").style.display = "block";
+            document.querySelector(".share-url").style.display = "block";
+          });
+      }
+
+      function printPage() {
+        window.print();
+      }
+
+      function copyURL() {
+        const url = window.location.href;
+        navigator.clipboard
+          .writeText(url)
+          .then(() => {
+            alert("URL copied to clipboard!");
+          })
+          .catch(() => {
+            // Fallback for older browsers
+            const textArea = document.createElement("textarea");
+            textArea.value = url;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+            alert("URL copied to clipboard!");
+          });
+      }
+    </script>
+  </body>
+</html>
