@@ -21,12 +21,25 @@
         --fnatic: #ff6600;
         --prx: #222;
       }
+
+      /* Dark mode colors */
+      [data-theme="dark"] {
+        --main-bg: #121212;
+        --card-bg: #1e1e1e;
+        --primary: #f0f0f0;
+        --secondary: #b0b0b0;
+        --accent: #333333;
+        --border: #333333;
+        --highlight: #2a2a2a;
+      }
+
       body {
         font-family: "Segoe UI", "Roboto", "Prompt", "Kanit", Arial, sans-serif;
         background: var(--main-bg);
         color: var(--primary);
         line-height: 1.7;
         min-height: 100vh;
+        transition: background-color 0.3s ease, color 0.3s ease;
       }
       .container {
         max-width: 1100px;
@@ -208,6 +221,18 @@
         font-weight: 500;
         color: var(--primary);
         margin-bottom: 4px;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
       }
       .stat-label {
         color: var(--secondary);
@@ -358,8 +383,11 @@
         top: 20px;
         right: 20px;
         z-index: 1000;
+        display: flex;
+        gap: 10px;
       }
-      .export-btn {
+      .export-btn,
+      .theme-toggle-btn {
         background: #232323;
         color: #fff;
         border: none;
@@ -374,189 +402,137 @@
         box-shadow: 0 1px 6px 0 rgba(40, 40, 40, 0.07);
         transition: background 0.2s;
       }
-      .export-btn:hover {
+      .export-btn:hover,
+      .theme-toggle-btn:hover {
         background: #444;
       }
-      .highlight {
-        background: #232323;
-        color: #fff;
-        padding: 2px 8px;
-        border-radius: 6px;
-        font-weight: bold;
+
+      [data-theme="dark"] .export-btn,
+      [data-theme="dark"] .theme-toggle-btn {
+        background: #444;
       }
-      .fade-in {
-        animation: fadeIn 1.2s;
+      [data-theme="dark"] .export-btn:hover,
+      [data-theme="dark"] .theme-toggle-btn:hover {
+        background: #555;
       }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
+
+      /* Dark mode overrides */
+      [data-theme="dark"] .player-photo {
+        border-color: #555;
+        background: #333;
       }
-      .player-highlight {
-        background: #f5f5f5;
-        border-left: 4px solid #232323;
-        padding: 10px 15px;
-        margin: 10px 0;
-        border-radius: 8px;
-        color: var(--primary);
-        font-size: 1em;
+      [data-theme="dark"] .player:hover {
+        background: #2d2d3d;
       }
-      .fun-fact {
-        background: #f5f5f5;
-        border-left: 4px solid #232323;
-        padding: 10px 15px;
-        margin: 15px 0;
-        border-radius: 8px;
-        font-size: 0.99em;
-        color: var(--primary);
+      [data-theme="dark"] .fun-fact,
+      [data-theme="dark"] .player-highlight {
+        background: #2a2a2a;
+        border-left-color: #555;
       }
-      @media print {
-        .export-section {
-          display: none;
-        }
-        body {
-          background: white;
-        }
-        .section {
-          page-break-inside: avoid;
-        }
+      [data-theme="dark"] .win-rate {
+        background: #333;
       }
-      @media (max-width: 900px) {
-        .container {
-          padding: 24px 2vw;
-        }
-        .roster-grid,
-        .style-comparison,
-        .coaches {
-          grid-template-columns: 1fr;
-          gap: 18px;
-        }
-        .vs-section {
-          flex-direction: column;
-          gap: 18px;
-        }
-        .vs {
-          margin: 0;
-          font-size: 1.3em;
-        }
-        .export-section {
-          position: static;
-          text-align: center;
-          margin-bottom: 24px;
-        }
+      [data-theme="dark"] .highlight {
+        background: #444;
       }
-      .player-stat-highlight {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        margin-top: 10px;
+      .highlight-data {
+        color: #FF5900;
+        font-weight: 700;
+        display: inline-block;
+        padding: 0 2px;
       }
-      .player-stat-chart {
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 1px 6px 0 rgba(40, 40, 40, 0.07);
-        border: 1.5px solid #e0e0e0;
+      
+      [data-theme="dark"] .highlight-data {
+        color: #FF7000;
       }
-      .stat-blocks {
-        display: flex;
-        gap: 10px;
+      
+      .team-roster:nth-of-type(2) .highlight-data {
+        color: #0000FF;
       }
-      .stat-block {
-        background: #232323;
-        color: #fff;
-        border-radius: 8px;
-        padding: 8px 14px 6px 14px;
-        text-align: center;
-        min-width: 60px;
-        box-shadow: 0 2px 8px 0 rgba(40, 40, 40, 0.1);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+      
+      [data-theme="dark"] .team-roster:nth-of-type(2) .highlight-data {
+        color: #8000FF;
       }
-      .stat-label {
-        font-size: 0.85em;
-        color: #1f1f1f;
-        font-weight: 600;
-        letter-spacing: 1px;
-        margin-bottom: 2px;
-        text-transform: uppercase;
-      }
+      
       .stat-value {
-        font-size: 1.35em;
-        font-weight: bold;
-        color: #fff;
-        letter-spacing: 1px;
+        font-size: 2.1em;
+        font-weight: 500;
+        color: var(--primary);
+        margin-bottom: 4px;
+        animation: pulse 2s infinite;
       }
-      /* PRX theme color overrides */
-      .team-roster:nth-of-type(2) .stat-block {
-        background: #0000ff;
-        color: #fff;
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
       }
-      .team-roster:nth-of-type(2) .stat-label {
-        color: #ff0080;
+      
+      .important-stat {
+        position: relative;
+        overflow: hidden;
       }
-      .team-roster:nth-of-type(2) .stat-bar-inner {
-        background: linear-gradient(90deg, #8000ff 0%, #ff0080 100%) !important;
+      
+      .important-stat::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, rgba(255,89,0,0.1) 0%, rgba(255,112,0,0) 70%);
+        z-index: 1;
+        pointer-events: none;
       }
-      .team-roster:nth-of-type(2) .player-stat-chart {
-        border: 1.5px solid #8000ff;
-        background: #fff;
+      
+      .team-roster:nth-of-type(2) .important-stat::after {
+        background: linear-gradient(45deg, rgba(0,0,255,0.1) 0%, rgba(128,0,255,0) 70%);
       }
-      .team-roster:nth-of-type(2) .player-info,
-      .team-roster:nth-of-type(2) .player-name,
-      .team-roster:nth-of-type(2) .player-role {
-        color: #000000;
+      
+      .key-comparison {
+        background: #f9f9f9;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 20px 0;
+        border-left: 4px solid #FF5900;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
       }
-      .team-roster:nth-of-type(2) {
-        background: #fff;
-        border-color: #8000ff;
+      
+      [data-theme="dark"] .key-comparison {
+        background: #2a2a2a;
+        border-left: 4px solid #FF7000;
       }
-      .team-roster:nth-of-type(2) h3 {
-        color: #8000ff;
-        border-bottom: 1px solid #ff0080;
+      
+      .vs-highlight {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0;
       }
-      .team-roster:nth-of-type(2) .player-detail strong {
-        color: #8000ff;
+      
+      .vs-highlight span {
+        flex: 1;
+        text-align: center;
+        padding: 8px;
+        font-weight: 600;
       }
-      /* Fnatic theme color overrides */
-      .team-roster:nth-of-type(1) .stat-block {
-        background: #ff5900;
-        color: #fff;
-      }
-      .team-roster:nth-of-type(1) .stat-label {
-        color: #ff7000;
-      }
-      .team-roster:nth-of-type(1) .stat-bar-inner {
-        background: linear-gradient(90deg, #ff5900 0%, #ff7000 100%) !important;
-      }
-      .team-roster:nth-of-type(1) .player-stat-chart {
-        border: 1.5px solid #ff5900;
-        background: #fff;
-      }
-      .team-roster:nth-of-type(1) .player-info,
-      .team-roster:nth-of-type(1) .player-name,
-      .team-roster:nth-of-type(1) .player-role {
-        color: #1f1f1f;
-      }
-      .team-roster:nth-of-type(1) {
-        background: #fff;
-        border-color: #ff5900;
-      }
-      .team-roster:nth-of-type(1) h3 {
-        color: #ff5900;
-        border-bottom: 1px solid #ff7000;
-      }
-      .team-roster:nth-of-type(1) .player-detail strong {
-        color: #ff5900;
+      
+      .vs-highlight .vs-label {
+        flex: 0.2;
+        font-weight: normal;
+        color: var(--secondary);
       }
     </style>
   </head>
   <body>
     <div class="export-section">
       <button class="export-btn" onclick="printPage()">Print</button>
+      <button class="theme-toggle-btn" id="theme-toggle">🌓 Theme</button>
     </div>
 
     <div class="container" id="content">
@@ -642,11 +618,11 @@
                       <strong>สไตล์:</strong> เน้นวางแผนรอบลึก สร้างจังหวะให้ทีม
                     </li>
                     <li>
-                      <strong>จุดแข็ง:</strong> mid-round call, clutch play
+                      <strong>จุดแข็ง:</strong> <span class="highlight-data">mid-round call</span>, clutch play
                     </li>
                     <li><strong>จุดอ่อน:</strong> ฟอร์มขึ้นลงในรอบสำคัญ</li>
                     <li>
-                      <strong>สถิติ:</strong> 1.12 K/D, 75% post-plant win
+                      <strong>สถิติ:</strong> 1.12 K/D, <span class="highlight-data">75% post-plant win</span>
                     </li>
                   </ul>
                   <div class="player-stat-highlight">
@@ -788,9 +764,9 @@
                 <div class="player-detail">
                   <ul>
                     <li><strong>สไตล์:</strong> anchor site, clutch เก่ง</li>
-                    <li><strong>จุดแข็ง:</strong> aim แม่น, multi-kill บ่อย</li>
+                    <li><strong>จุดแข็ง:</strong> <span class="highlight-data">aim แม่น</span>, multi-kill บ่อย</li>
                     <li><strong>จุดอ่อน:</strong> บางครั้งโดน isolate</li>
-                    <li><strong>สถิติ:</strong> 308 ACS, 1.25 K/D</li>
+                    <li><strong>สถิติ:</strong> <span class="highlight-data">308 ACS</span>, 1.25 K/D</li>
                   </ul>
                   <div class="player-stat-highlight">
                     <canvas
@@ -1088,9 +1064,9 @@
                 <div class="player-detail">
                   <ul>
                     <li><strong>สไตล์:</strong> entry fragger, ดุดัน</li>
-                    <li><strong>จุดแข็ง:</strong> entry kill สูง, clutch</li>
+                    <li><strong>จุดแข็ง:</strong> <span class="highlight-data">entry kill สูง</span>, clutch</li>
                     <li><strong>จุดอ่อน:</strong> เสี่ยงตาย, บางรอบใจร้อน</li>
-                    <li><strong>สถิติ:</strong> 247 ACS, 1.19 K/D</li>
+                    <li><strong>สถิติ:</strong> <span class="highlight-data">247 ACS</span>, 1.19 K/D</li>
                   </ul>
                   <div class="player-stat-highlight">
                     <canvas
@@ -1160,9 +1136,9 @@
                 <div class="player-detail">
                   <ul>
                     <li><strong>สไตล์:</strong> outplay, highlight play</li>
-                    <li><strong>จุดแข็ง:</strong> aim โหด, 1vX clutch</li>
+                    <li><strong>จุดแข็ง:</strong> <span class="highlight-data">aim โหด</span>, <span class="highlight-data">1vX clutch</span></li>
                     <li><strong>จุดอ่อน:</strong> บางรอบเล่นเสี่ยง</li>
-                    <li><strong>สถิติ:</strong> 235 ACS, 1.16 K/D</li>
+                    <li><strong>สถิติ:</strong> 235 ACS, <span class="highlight-data">1.16 K/D</span></li>
                   </ul>
                   <div class="player-stat-highlight">
                     <canvas
@@ -1407,9 +1383,22 @@
 
       <div class="section fade-in">
         <h2>2025 Performance Statistics</h2>
+        <div class="key-comparison">
+          <h3>Key Performance Indicators</h3>
+          <div class="vs-highlight">
+            <span>Fnatic: <span class="highlight-data">80%</span> Win Rate</span>
+            <span class="vs-label">VS</span>
+            <span>Paper Rex: <span class="highlight-data">80%</span> Win Rate</span>
+          </div>
+          <div class="vs-highlight">
+            <span>Fnatic: <span class="highlight-data">65%</span> Defense</span>
+            <span class="vs-label">VS</span>
+            <span>Paper Rex: <span class="highlight-data">60%</span> Attack</span>
+          </div>
+        </div>
         <canvas id="teamStatsChart" height="120"></canvas>
         <div class="stats-grid">
-          <div class="stat-card">
+          <div class="stat-card important-stat">
             <div class="stat-value">80%</div>
             <div class="stat-label">Fnatic Win Rate (Masters)</div>
             <div class="stat-bar">
@@ -1419,7 +1408,7 @@
               ></div>
             </div>
           </div>
-          <div class="stat-card">
+          <div class="stat-card important-stat">
             <div class="stat-value">80%</div>
             <div class="stat-label">Paper Rex Win Rate (Masters)</div>
             <div class="stat-bar">
@@ -1429,7 +1418,7 @@
               ></div>
             </div>
           </div>
-          <div class="stat-card">
+          <div class="stat-card important-stat">
             <div class="stat-value">65%</div>
             <div class="stat-label">Fnatic Defense Efficiency</div>
             <div class="stat-bar">
@@ -1439,7 +1428,7 @@
               ></div>
             </div>
           </div>
-          <div class="stat-card">
+          <div class="stat-card important-stat">
             <div class="stat-value">60%</div>
             <div class="stat-label">Paper Rex Attack Win Rate</div>
             <div class="stat-bar">
@@ -1459,7 +1448,7 @@
               ></div>
             </div>
           </div>
-          <div class="stat-card">
+          <div class="stat-card important-stat">
             <div class="stat-value">57%</div>
             <div class="stat-label">PRX First Blood Rate</div>
             <div class="stat-bar">
@@ -1685,6 +1674,9 @@
                 label: "ACS",
                 data: [308, 247, 235, 215],
                 backgroundColor: ["#FF5900", "#8000FF", "#8000FF", "#8000FF"],
+                borderWidth: 2,
+                borderColor: ["#FF7000", "#FF0080", "#FF0080", "#FF0080"],
+                borderRadius: 6
               },
             ],
           },
@@ -1760,6 +1752,20 @@
             });
           });
       };
+
+      // Theme toggle script
+      const themeToggleBtn = document.getElementById("theme-toggle");
+      themeToggleBtn.addEventListener("click", () => {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        if (currentTheme === "dark") {
+          document.documentElement.setAttribute("data-theme", "light");
+          themeToggleBtn.innerHTML = "🌙 Switch";
+        } else {
+          document.documentElement.setAttribute("data-theme", "dark");
+          themeToggleBtn.innerHTML = "☀️ Switch";
+        }
+      });
     </script>
   </body>
 </html>
