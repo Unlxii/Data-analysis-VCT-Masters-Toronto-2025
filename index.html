@@ -3,12 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="VCT Masters Toronto 2025 Grand Final (BO5) Data Analysis between Fnatic and Paper Rex"
+    />
+    <meta
+      name="keywords"
+      content="VCT, Valorant, Masters, Toronto, 2025, Fnatic, Paper Rex, eSports, Analysis"
+    />
+    <!-- Allow images from local sources and data URIs for fallbacks -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="img-src 'self' data: blob:; default-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; style-src 'self' https://cdnjs.cloudflare.com 'unsafe-inline';"
+    />
+    <meta
+      property="og:title"
+      content="VCT Masters Toronto 2025 - Grand Final Analysis"
+    />
+    <meta
+      property="og:description"
+      content="Comprehensive data analysis of the VCT Masters Toronto 2025 Grand Final between Fnatic and Paper Rex"
+    />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#FF6600" />
     <title>VCT Masters Toronto 2025 - Grand Final Analysis</title>
+
+    <!-- Preload key images -->
+    <link rel="preload" href="./img/fnatic-logo.png" as="image" />
+    <link rel="preload" href="./img/prx-logo.png" as="image" />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Fallback for Chart.js loading error -->
+    <script>
+      window.addEventListener(
+        "error",
+        function (e) {
+          if (e.target.src && e.target.src.includes("chart.js")) {
+            console.error(
+              "Chart.js failed to load. Creating fallback display."
+            );
+            document.addEventListener("DOMContentLoaded", function () {
+              document.querySelectorAll("canvas").forEach(function (canvas) {
+                if (
+                  canvas.id === "teamStatsChart" ||
+                  canvas.id === "playerStatsChart" ||
+                  canvas.classList.contains("player-stat-chart")
+                ) {
+                  const ctx = canvas.getContext("2d");
+                  ctx.font = "14px Arial";
+                  ctx.fillStyle = "#666";
+                  ctx.fillText(
+                    "Chart data available in text format below",
+                    10,
+                    30
+                  );
+                }
+              });
+            });
+          }
+        },
+        true
+      );
+    </script>
     <style>
       :root {
         --main-bg: #fafbfc;
@@ -48,6 +108,29 @@
         background: var(--card-bg);
         border-radius: 18px;
         box-shadow: 0 4px 32px 0 rgba(40, 40, 40, 0.07);
+      }
+
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+        .container {
+          padding: 24px 12px 20px 12px;
+          border-radius: 10px;
+        }
+        .roster-grid {
+          grid-template-columns: 1fr;
+        }
+        .vs-section {
+          flex-direction: column;
+        }
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+        .team-logo-img {
+          max-width: 80px;
+        }
+        .player-photo {
+          max-width: 100px;
+        }
       }
       .header {
         text-align: center;
@@ -553,7 +636,7 @@
         <div class="team">
           <img
             class="team-logo-img"
-            src="img/fnatic-logo.png"
+            src="./img/fnatic-logo.png"
             alt="Fnatic Logo"
             style="object-fit: cover"
           />
@@ -563,7 +646,7 @@
         <div class="team">
           <img
             class="team-logo-img"
-            src="img/prx-logo.png"
+            src="./img/prx-logo.png"
             alt="Paper Rex Logo"
           />
           <h2>Paper Rex</h2>
@@ -582,14 +665,14 @@
             <div class="player">
               <img
                 class="player-photo"
-                src="img/players/boaster.png"
+                src="./img/players/boaster.png"
                 alt="boaster"
               />
               <div class="player-info">
                 <div class="player-name">
                   Boaster
                   <img
-                    src="img/flags/uk.png"
+                    src="./img/flags/uk.png"
                     alt="UK"
                     title="United Kingdom"
                     style="
@@ -813,7 +896,7 @@
             <div class="player">
               <img
                 class="player-photo"
-                src="img/players/chronicle.png"
+                src="./img/players/chronicle.png"
                 alt="chronicle"
               />
               <div class="player-info">
@@ -891,7 +974,7 @@
             <div class="player">
               <img
                 class="player-photo"
-                src="img/players/kaajak.png"
+                src="./img/players/kaajak.png"
                 alt="kaajak"
               />
               <div class="player-info">
@@ -969,7 +1052,7 @@
             <div class="player">
               <img
                 class="player-photo"
-                src="img/players/f0rsaken.png"
+                src="./img/players/f0rsaken.png"
                 alt="f0rsaken"
               />
               <div class="player-info">
@@ -1041,7 +1124,7 @@
             <div class="player">
               <img
                 class="player-photo"
-                src="img/players/jinggg.png"
+                src="./img/players/jinggg.png"
                 alt="jinggg"
               />
               <div class="player-info">
@@ -1198,7 +1281,7 @@
             <div class="player">
               <img
                 class="player-photo"
-                src="img/players/patmen.png"
+                src="./img/players/patmen.png"
                 alt="patmen"
               />
               <div class="player-info">
@@ -1352,7 +1435,11 @@
 
         <div class="coaches">
           <div class="coach-info">
-            <img class="coach-photo" src="img/coaches/milan.png" alt="milan" />
+            <img
+              class="coach-photo"
+              src="./img/coaches/milan.png"
+              alt="milan"
+            />
             <h4>Fnatic Coaching Staff</h4>
             <p>
               <strong>Milan</strong>
@@ -1378,7 +1465,7 @@
           <div class="coach-info">
             <img
               class="coach-photo"
-              src="img/coaches/alecks.png"
+              src="./img/coaches/alecks.png"
               alt="alecks"
             />
             <h4>Paper Rex Coaching Staff</h4>
@@ -1663,131 +1750,154 @@
 
       // Chart.js: Team Stats
       window.onload = function () {
-        const ctx = document.getElementById("teamStatsChart").getContext("2d");
-        new Chart(ctx, {
-          type: "bar",
-          data: {
-            labels: [
-              "Fnatic Win Rate",
-              "PRX Win Rate",
-              "Fnatic Defense",
-              "PRX Attack",
-              "Fnatic Clutch",
-              "PRX First Blood",
-            ],
-            datasets: [
-              {
-                label: "Stat (%)",
-                data: [80, 80, 65, 60, 23, 57],
-                backgroundColor: [
-                  "#FF5900",
-                  "#8000FF",
-                  "#FF5900",
-                  "#8000FF",
-                  "#FF5900",
-                  "#8000FF",
-                ],
-              },
-            ],
-          },
-          options: {
-            plugins: { legend: { display: false } },
-            scales: {
-              y: { beginAtZero: true, max: 100 },
-            },
-          },
-        });
-
-        // Player Stats Chart
-        const ctx2 = document
-          .getElementById("playerStatsChart")
-          .getContext("2d");
-        new Chart(ctx2, {
-          type: "bar",
-          data: {
-            labels: ["Alfajer", "Jinggg", "something", "f0rsakeN"],
-            datasets: [
-              {
-                label: "ACS",
-                data: [308, 247, 235, 215],
-                backgroundColor: ["#FF5900", "#8000FF", "#8000FF", "#8000FF"],
-                borderWidth: 2,
-                borderColor: ["#FF7000", "#FF0080", "#FF0080", "#FF0080"],
-                borderRadius: 6,
-              },
-            ],
-          },
-          options: {
-            plugins: { legend: { display: false } },
-            scales: {
-              y: { beginAtZero: true, max: 350 },
-            },
-          },
-        });
-
-        // Player mini stat chart for each player
-        const playerStatData = [
-          // [ACS, K/D, FB%] (ตัวอย่าง: ใส่ตามลำดับผู้เล่นในหน้า)
-          [308, 1.25, 48], // Alfajer
-          [247, 1.19, 57], // Jinggg
-          [235, 1.16, 53], // something
-          [215, 1.08, 41], // f0rsakeN
-          [210, 1.18, 38], // crashies
-          [220, 1.1, 35], // Chronicle
-          [230, 1.2, 60], // Kaajak
-          [200, 1.05, 29], // PatMen
-          [198, 1.1, 32], // d4v41
-        ];
-        document
-          .querySelectorAll(".player-stat-chart")
-          .forEach((canvas, idx) => {
-            const data = playerStatData[idx % playerStatData.length];
-            // Default: Fnatic color
-            let colors = ["#FF5900", "#FF7000", "#FFFFFF"];
-            // Find if this canvas is in PRX team-roster
-            let isPRX = false;
-            let el = canvas;
-            while (el && el.classList) {
-              if (
-                el.classList.contains("team-roster") &&
-                el.querySelector("h3") &&
-                el.querySelector("h3").textContent.includes("Paper Rex")
-              ) {
-                isPRX = true;
-                break;
-              }
-              el = el.parentElement;
-            }
-            if (isPRX) {
-              colors = ["#0000FF", "#8000FF", "#FF0080"];
-            }
-            new Chart(canvas.getContext("2d"), {
+        try {
+          if (document.getElementById("teamStatsChart")) {
+            const ctx = document
+              .getElementById("teamStatsChart")
+              .getContext("2d");
+            new Chart(ctx, {
               type: "bar",
               data: {
-                labels: ["ACS", "K/D", "FB%"],
+                labels: [
+                  "Fnatic Win Rate",
+                  "PRX Win Rate",
+                  "Fnatic Defense",
+                  "PRX Attack",
+                  "Fnatic Clutch",
+                  "PRX First Blood",
+                ],
                 datasets: [
                   {
-                    data: data,
-                    backgroundColor: colors,
-                    borderRadius: 6,
-                    barPercentage: 0.7,
-                    categoryPercentage: 0.7,
+                    label: "Stat (%)",
+                    data: [80, 80, 65, 60, 23, 57],
+                    backgroundColor: [
+                      "#FF5900",
+                      "#8000FF",
+                      "#FF5900",
+                      "#8000FF",
+                      "#FF5900",
+                      "#8000FF",
+                    ],
                   },
                 ],
               },
               options: {
-                responsive: false,
-                plugins: {
-                  legend: { display: false },
-                  tooltip: { enabled: false },
-                },
+                plugins: { legend: { display: false } },
                 scales: {
-                  x: { display: false },
-                  y: { display: false, min: 0, max: data[0] > 100 ? 350 : 2 },
+                  y: { beginAtZero: true, max: 100 },
                 },
               },
             });
-          });
+          }
+        } catch (error) {
+          console.error("Error creating team stats chart:", error);
+        }
+
+        // Player Stats Chart
+        try {
+          if (document.getElementById("playerStatsChart")) {
+            const ctx2 = document
+              .getElementById("playerStatsChart")
+              .getContext("2d");
+            new Chart(ctx2, {
+              type: "bar",
+              data: {
+                labels: ["Alfajer", "Jinggg", "something", "f0rsakeN"],
+                datasets: [
+                  {
+                    label: "ACS",
+                    data: [308, 247, 235, 215],
+                    backgroundColor: [
+                      "#FF5900",
+                      "#8000FF",
+                      "#8000FF",
+                      "#8000FF",
+                    ],
+                    borderWidth: 2,
+                    borderColor: ["#FF7000", "#FF0080", "#FF0080", "#FF0080"],
+                    borderRadius: 6,
+                  },
+                ],
+              },
+              options: {
+                plugins: { legend: { display: false } },
+                scales: {
+                  y: { beginAtZero: true, max: 350 },
+                },
+              },
+            });
+          }
+        } catch (error) {
+          console.error("Error creating player stats chart:", error);
+        }
+
+        // Player mini stat chart for each player
+        try {
+          const playerStatData = [
+            // [ACS, K/D, FB%] (ตัวอย่าง: ใส่ตามลำดับผู้เล่นในหน้า)
+            [308, 1.25, 48], // Alfajer
+            [247, 1.19, 57], // Jinggg
+            [235, 1.16, 53], // something
+            [215, 1.08, 41], // f0rsakeN
+            [210, 1.18, 38], // crashies
+            [220, 1.1, 35], // Chronicle
+            [230, 1.2, 60], // Kaajak
+            [200, 1.05, 29], // PatMen
+            [198, 1.1, 32], // d4v41
+          ];
+          document
+            .querySelectorAll(".player-stat-chart")
+            .forEach((canvas, idx) => {
+              const data = playerStatData[idx % playerStatData.length];
+              // Default: Fnatic color
+              let colors = ["#FF5900", "#FF7000", "#FFFFFF"];
+              // Find if this canvas is in PRX team-roster
+              let isPRX = false;
+              let el = canvas;
+              while (el && el.classList) {
+                if (
+                  el.classList.contains("team-roster") &&
+                  el.querySelector("h3") &&
+                  el.querySelector("h3").textContent.includes("Paper Rex")
+                ) {
+                  isPRX = true;
+                  break;
+                }
+                el = el.parentElement;
+              }
+              if (isPRX) {
+                colors = ["#0000FF", "#8000FF", "#FF0080"];
+              }
+              new Chart(canvas.getContext("2d"), {
+                type: "bar",
+                data: {
+                  labels: ["ACS", "K/D", "FB%"],
+                  datasets: [
+                    {
+                      data: data,
+                      backgroundColor: colors,
+                      borderRadius: 6,
+                      barPercentage: 0.7,
+                      categoryPercentage: 0.7,
+                    },
+                  ],
+                },
+                options: {
+                  responsive: false,
+                  plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false },
+                  },
+                  scales: {
+                    x: { display: false },
+                    y: { display: false, min: 0, max: data[0] > 100 ? 350 : 2 },
+                  },
+                },
+              });
+            });
+        } catch (error) {
+          console.error("Error creating player stat charts:", error);
+        }
       };
 
       // Theme toggle script
@@ -1802,6 +1912,91 @@
           document.documentElement.setAttribute("data-theme", "dark");
           themeToggleBtn.innerHTML = "☀️ Switch";
         }
+      });
+
+      // Set initial theme based on user preference
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        document.documentElement.setAttribute("data-theme", "dark");
+        themeToggleBtn.innerHTML = "☀️ Switch";
+      }
+    </script>
+
+    <!-- Fix broken image paths and provide fallbacks -->
+    <script>
+      // Function to check and fix image paths on load
+      document.addEventListener("DOMContentLoaded", function () {
+        // Store original image sources for fallback mechanism
+        const imageMap = {};
+
+        // Create BASE64 fallback image once
+        const fallbackImageSrc =
+          "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNlMWUxZTEiLz4KPHRleHQgeD0iNTAiIHk9IjUwIiBmb250LXNpemU9IjEyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBhbGlnbm1lbnQtYmFzZWxpbmU9Im1pZGRsZSIgZmlsbD0iIzc3Nzc3NyI+SW1hZ2UgTm90IEZvdW5kPC90ZXh0Pgo8L3N2Zz4=";
+
+        function createRelativePath(src) {
+          // Get base URL
+          const baseUrl =
+            window.location.origin +
+            window.location.pathname.substring(
+              0,
+              window.location.pathname.lastIndexOf("/") + 1
+            );
+
+          // Convert absolute URL to relative path
+          if (src.startsWith(baseUrl)) {
+            return src.substring(baseUrl.length);
+          }
+          return src;
+        }
+
+        // Process all images on the page
+        const images = document.querySelectorAll("img");
+        images.forEach(function (img) {
+          const originalSrc = img.getAttribute("src");
+          imageMap[img.src] = true;
+
+          // Make sure all image paths are consistent (using "./img/")
+          const relativePath = createRelativePath(originalSrc);
+
+          if (relativePath.match(/^img\//)) {
+            // Change "img/" to "./img/"
+            img.src = "./" + relativePath;
+          }
+
+          // Handle loading errors with retry mechanism
+          img.onerror = function () {
+            const element = this;
+            const currentSrc = element.src;
+
+            console.warn("Image failed to load:", currentSrc);
+
+            // Try alternative paths first
+            if (currentSrc.includes("./img/")) {
+              // Try without "./"
+              element.src = currentSrc.replace("./img/", "img/");
+            } else if (
+              currentSrc.includes("img/") &&
+              !currentSrc.includes("./img/")
+            ) {
+              // Try with "./"
+              element.src = currentSrc.replace("img/", "./img/");
+            } else {
+              // Use fallback image if all else fails
+              element.src = fallbackImageSrc;
+              element.alt = element.alt + " (not found)";
+              element.style.opacity = "0.7";
+            }
+
+            // Final fallback if retries fail
+            element.onerror = function () {
+              element.src = fallbackImageSrc;
+              element.alt = element.alt + " (not found)";
+              element.style.opacity = "0.7";
+            };
+          };
+        });
       });
     </script>
   </body>
