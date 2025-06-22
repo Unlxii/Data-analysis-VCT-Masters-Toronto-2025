@@ -394,7 +394,6 @@
     <div class="export-section">
       <button class="export-btn" onclick="exportToPDF()">Export PDF</button>
       <button class="export-btn" onclick="printPage()">Print</button>
-      <button class="export-btn" onclick="copyURL()">Copy URL</button>
     </div>
 
     <div class="container" id="content">
@@ -668,11 +667,6 @@
       </div>
     </div>
 
-    <div class="share-url" id="shareUrl">
-      Share this analysis: หน้าเว็บนี้สามารถแชร์ URL ได้โดยตรง หรือใช้งานใน
-      Claude.ai
-    </div>
-
     <script>
       function exportToPDF() {
         const element = document.getElementById("content");
@@ -701,25 +695,6 @@
 
       function printPage() {
         window.print();
-      }
-
-      function copyURL() {
-        const url = window.location.href;
-        navigator.clipboard
-          .writeText(url)
-          .then(() => {
-            alert("URL copied to clipboard!");
-          })
-          .catch(() => {
-            // Fallback for older browsers
-            const textArea = document.createElement("textarea");
-            textArea.value = url;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand("copy");
-            document.body.removeChild(textArea);
-            alert("URL copied to clipboard!");
-          });
       }
     </script>
   </body>
