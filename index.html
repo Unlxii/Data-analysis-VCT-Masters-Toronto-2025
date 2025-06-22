@@ -1661,45 +1661,6 @@
         );
       }
 
-      // Handle image loading errors
-      document.addEventListener("DOMContentLoaded", function () {
-        const images = document.querySelectorAll("img");
-
-        // Default fallback images
-        const fallbacks = {
-          player: "https://i.imgur.com/JQP9Dau.png", // Generic player silhouette
-          coach: "https://i.imgur.com/wv2VXs6.png", // Generic coach silhouette
-          team: "https://i.imgur.com/7UJAj1x.png", // Generic team logo
-          flag: "https://i.imgur.com/7FKFVYQ.png", // Generic flag
-          agent: "https://i.imgur.com/gKFDLGf.png", // Generic agent icon
-        };
-
-        images.forEach((img) => {
-          img.onerror = function () {
-            // Determine image type based on class, src, or alt
-            let type = "player"; // Default fallback
-
-            if (img.classList.contains("coach-photo")) {
-              type = "coach";
-            } else if (img.classList.contains("team-logo-img")) {
-              type = "team";
-            } else if (img.classList.contains("player-photo")) {
-              type = "player";
-            } else if (img.src.includes("flags")) {
-              type = "flag";
-            } else if (img.src.includes("agents")) {
-              type = "agent";
-            }
-
-            // Set fallback image
-            this.src = fallbacks[type];
-
-            // Remove onerror to prevent infinite loop
-            this.onerror = null;
-          };
-        });
-      });
-
       // Chart.js: Team Stats
       window.onload = function () {
         const ctx = document.getElementById("teamStatsChart").getContext("2d");
